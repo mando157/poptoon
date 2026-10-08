@@ -1,0 +1,65 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+body {
+    overflow-x: hidden;
+    font-family: "Instrument Sans";
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Bricolage Grotesque";
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+li {
+    list-style: none;
+}
+
+section {
+    padding: 50px 0;
+}
+
+
+.mainButton {
+    background: $primary-color;
+    border: 1px solid $primary-color;
+    padding: 8px 16px;
+    border-radius: $border-r;
+
+    span {
+        color: $dark-color;
+        font-size: 14px;
+        font-weight: 600;
+        transition-duration: .5s;
+
+        i {
+            margin-right: 5px;
+            transition-duration: .5s;
+        }
+    }
+
+    &:hover {
+        span {
+            color: #000;
+
+            i {
+                margin: 0px 5px 0px 5px;
+            }
+        }
+    }
+
+}

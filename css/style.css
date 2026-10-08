@@ -1,0 +1,275 @@
+body {
+  overflow-x: hidden;
+  font-family: "Instrument Sans";
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bricolage Grotesque";
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+li {
+  list-style: none;
+}
+
+section {
+  padding: 50px 0;
+}
+
+.mainButton {
+  background: #B8F500;
+  border: 1px solid #B8F500;
+  padding: 8px 16px;
+  border-radius: 10px;
+}
+.mainButton span {
+  color: #2E372D;
+  font-size: 14px;
+  font-weight: 600;
+  transition-duration: 0.5s;
+}
+.mainButton span i {
+  margin-right: 5px;
+  transition-duration: 0.5s;
+}
+.mainButton:hover span {
+  color: #000;
+}
+.mainButton:hover span i {
+  margin: 0px 5px 0px 5px;
+}
+
+#Home .carousel .scroll-pages {
+  position: absolute;
+  top: initial;
+  right: 0%;
+  bottom: 5%;
+  left: initial;
+  z-index: 10;
+  width: auto;
+  height: auto;
+}
+#Home .carousel .scroll-pages .content {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+  gap: 15px;
+  padding-right: 15px;
+}
+#Home .carousel .scroll-pages .content .image {
+  position: relative;
+  width: 150px;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(217, 255, 102, 0.3);
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  #Home .carousel .scroll-pages .content .image {
+    display: none;
+  }
+}
+#Home .carousel .scroll-pages .content .image {
+  /* 850 */
+}
+@media (min-width: 769px) and (max-width: 1300px) {
+  #Home .carousel .scroll-pages .content .image {
+    width: 100px;
+    height: auto;
+    display: block;
+  }
+}
+#Home .carousel .scroll-pages .content .image {
+  /* 1050 */
+}
+@media (min-width: 992px) and (max-width: 1300px) {
+  #Home .carousel .scroll-pages .content .image {
+    width: 120px;
+    height: auto;
+  }
+}
+#Home .carousel .scroll-pages .content .image::before {
+  content: "";
+  position: absolute;
+  top: initial;
+  right: initial;
+  bottom: 0px;
+  left: 0;
+  z-index: 2;
+  display: block;
+  border-radius: 10px;
+  width: 0;
+  height: 3px;
+  background: rgb(217, 255, 102);
+  transition-delay: 0.3s;
+}
+#Home .carousel .scroll-pages .content .image.active {
+  border: 2px solid #B8F500;
+}
+#Home .carousel .scroll-pages .content .image.active::before {
+  transition-duration: 10s;
+  transition-timing-function: ease-in-out;
+  width: 100%;
+  height: 3px;
+}
+#Home .carousel .scroll-pages .content .image img {
+  width: 100%;
+  border-radius: 10px;
+}
+#Home .carousel .carousel-inner .carousel-item {
+  position: relative;
+  height: 100svh;
+}
+#Home .carousel .carousel-inner .carousel-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: initial;
+  bottom: initial;
+  left: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  background: -webkit-linear-gradient(to right, #080A09, transparent);
+  background: linear-gradient(to right, #080A09, transparent);
+}
+#Home .carousel .carousel-inner .carousel-item > img {
+  min-width: 100%;
+  position: absolute;
+  top: 50%;
+  right: initial;
+  bottom: initial;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption {
+  position: absolute;
+  top: 50%;
+  right: initial;
+  bottom: initial;
+  left: initial;
+  z-index: 3;
+  transform: translateY(-50%);
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box {
+  width: 280px;
+  height: auto;
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box .image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(255, 255, 255, 0.3) 0px 30px 60px -30px;
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box .image .overview {
+  position: absolute;
+  top: -90%;
+  right: initial;
+  bottom: initial;
+  left: -85%;
+  z-index: initial;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  padding: 10px 20px;
+  transition-duration: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box .image .overview i {
+  position: absolute;
+  top: initial;
+  right: 10px;
+  bottom: 10px;
+  left: initial;
+  z-index: initial;
+  color: #B8F500;
+  font-size: 25px;
+  transition-duration: 0.5s;
+  opacity: 1;
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box .image .overview p {
+  opacity: 0;
+  transition-duration: 0.5s;
+  color: #D9FF66;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0px 0px 10px #000;
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box .image:hover .overview {
+  position: absolute;
+  top: 0%;
+  right: initial;
+  bottom: initial;
+  left: 0%;
+  z-index: initial;
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box .image:hover .overview i {
+  opacity: 0;
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box .image:hover .overview p {
+  transition-delay: 0.5s;
+  opacity: 1;
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box .image img {
+  width: 100%;
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box .text {
+  text-align: start;
+  padding: 10px 0px;
+}
+#Home .carousel .carousel-inner .carousel-item .carousel-caption .box .text p {
+  color: #B8F500;
+}
+#Home .carousel .carousel-control-next,
+#Home .carousel .carousel-control-prev {
+  position: absolute;
+  top: initial;
+  bottom: 20PX;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 50px;
+  padding: 10px;
+  color: #B8F500;
+  border: 0;
+  opacity: 0.5;
+}
+#Home .carousel .carousel-control-next i,
+#Home .carousel .carousel-control-prev i {
+  font-size: 30px;
+}
+#Home .carousel .carousel-control-prev {
+  left: initial;
+  right: 65px;
+}
+
+/*# sourceMappingURL=style.css.map */

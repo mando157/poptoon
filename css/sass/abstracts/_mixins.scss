@@ -1,0 +1,73 @@
+@mixin flex($js: center, $al: center, $direction: row , $g : 0px) {
+    display: flex;
+    justify-content: $js;
+    align-items: $al;
+    flex-direction: $direction;
+    gap: $g;
+}
+
+@mixin size($w: 100%, $h: auto) {
+    width: $w;
+    height: $h;
+}
+
+@mixin position(
+    $p: absolute,
+    $t: initial,
+    $r: initial,
+    $b: initial,
+    $l: initial,
+    $z: initial
+) {
+    position: $p;
+    top: $t;
+    right: $r;
+    bottom: $b;
+    left: $l;
+    z-index: $z;
+}
+
+@mixin responsive($brakePoint) {
+
+    @if ($brakePoint == 350) {
+        /* 350 */
+        @media (max-width: 1300px) {
+            @content;
+        }
+    }
+
+    @else if ($brakePoint == 450) {
+        /* 450 */
+        @media (min-width: 371px) and (max-width: 1300px) {
+            @content;
+        }
+    }
+
+    @else if ($brakePoint == 650) {
+        /* 650 */
+        @media (min-width: 577px) and (max-width: 1300px) {
+            @content;
+        }
+    }
+
+    @else if ($brakePoint == 850) {
+        /* 850 */
+        @media (min-width: 769px) and (max-width: 1300px) {
+            @content;
+        }
+    }
+
+    @else if ($brakePoint == 1050) {
+        /* 1050 */
+        @media (min-width: 992px) and (max-width: 1300px) {
+            @content;
+        }
+    }
+
+    @else if ($brakePoint == 1250) {
+        /* 1250 */
+        @media (min-width: 1181px) and (max-width: 1300px) {
+            @content;
+        }
+    }
+}

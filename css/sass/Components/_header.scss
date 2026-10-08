@@ -1,0 +1,189 @@
+@use "../abstracts/" as *;
+
+#Home {
+    .carousel {
+        .scroll-pages {
+            @include position($b : 5%, $r : 0%, $z : 10);
+            @include size(auto, auto);
+
+            .content {
+                @include flex($js : start);
+                gap: 15px;
+                padding-right: 15px;
+
+                .image {
+                    position: relative;
+                    @include size(150px);
+                    overflow: hidden;
+                    border-radius: $border-r ;
+                    cursor: pointer;
+                    border: 1px solid rgb(217, 255, 102, .3);
+
+                    @include responsive(350) {
+                        display: none;
+                    }
+
+                    @include responsive(850) {
+                        @include size(100px);
+                        display: block;
+                    }
+
+                    @include responsive(1050) {
+                        @include size(120px);
+                    }
+
+                    &::before {
+                        content: "";
+                        @include position($b : 0px, $l : 0, $z : 2);
+                        display: block;
+                        border-radius: $border-r ;
+                        @include size(0, 3px);
+                        background: rgb(217, 255, 102);
+                        transition-delay: .3s;
+                    }
+
+                    &.active {
+                        border: 2px solid $primary-color;
+
+                        &::before {
+                            transition-duration: 10s;
+                            transition-timing-function: ease-in-out;
+                            @include size(100%, 3px);
+                        }
+                    }
+
+                    img {
+                        width: 100%;
+                        border-radius: $border-r ;
+                    }
+                }
+            }
+
+        }
+
+        .carousel-inner {
+            .carousel-item {
+                position: relative;
+                height: 100svh;
+
+                &::before {
+                    content: "";
+                    @include position($t : 0, $l : 0, $z : 2);
+                    display: block;
+                    @include size(100%, 100%);
+                    background: transparent;
+                    background: -webkit-linear-gradient(to right, $background , transparent);
+                    background: linear-gradient(to right, $background , transparent);
+                }
+
+                >img {
+                    // height: 100%;
+                    min-width: 100%;
+                    @include position($t : 50%, $l : 50%, $z : 1);
+                    transform: translate(-50%, -50%);
+                }
+
+                .carousel-caption {
+                    @include position($t : 50%, $z : 3);
+                    transform: translateY(-50%);
+
+                    .box {
+                        @include size(280px, auto);
+
+                        .image {
+                            position: relative;
+                            overflow: hidden;
+                            border-radius: $border-r;
+                            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(255, 255, 255, 0.3) 0px 30px 60px -30px;
+
+                            .overview {
+                                @include position($t : -90%, $l : -85%);
+                                @include size(100%, 100%);
+                                border-radius: $border-r ;
+                                background-color: rgb(0, 0, 0, 0.5);
+                                backdrop-filter: blur(5px);
+                                padding: 10px 20px;
+                                transition-duration: .5s;
+                                @include flex();
+
+                                i {
+                                    @include position($b : 10px, $r : 10px);
+                                    color: $primary-color;
+                                    font-size: 25px;
+                                    transition-duration: .5s;
+                                    opacity: 1;
+                                }
+                                
+                                p {
+                                    opacity: 0;
+                                    transition-duration: .5s;
+                                    color: $second-color;
+                                    font-weight: 600;
+                                    letter-spacing: 1px;
+                                    text-shadow: 0px 0px 10px #000;
+                                }
+                            }
+                            
+                            &:hover {
+                                .overview {
+                                    @include position($t : 0%, $l : 0%);
+                                    
+                                    i {
+                                        opacity: 0;
+                                    }
+                                    
+                                    p {
+                                        transition-delay: .5s;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+
+                            img {
+                                width: 100%;
+                            }
+                        }
+
+                        .text {
+                            text-align: start;
+                            padding: 10px 0px;
+
+                            p {
+                                color: $primary-color;
+                            }
+
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        .carousel-control-next,
+        .carousel-control-prev {
+            position: absolute;
+            top: initial;
+            bottom: 20PX;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 50px;
+            padding: 10px;
+            color: $primary-color;
+            border: 0;
+            opacity: .5;
+
+            i {
+                font-size: 30px;
+            }
+        }
+
+        .carousel-control-prev {
+            left: initial;
+            right: 65px;
+        }
+    }
+}
