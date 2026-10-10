@@ -88,7 +88,7 @@
                     transform: translateY(-50%);
 
                     .box {
-                        @include size(280px, auto);
+                        @include size(250px, auto);
 
                         .image {
                             position: relative;
@@ -107,7 +107,7 @@
                                 @include flex();
 
                                 i {
-                                    @include position($b : 10px, $r : 10px);
+                                    @include position($b : 5px, $r : 5px);
                                     color: $primary-color;
                                     font-size: 25px;
                                     transition-duration: .5s;

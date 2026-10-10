@@ -1,1 +1,130 @@
 @use "../abstracts/" as *;
+
+nav {
+    @include position($p : fixed, $t : 10px, $z : 999);
+    @include size();
+    
+    .container {
+        position: relative;
+        background-color: rgb(217, 255, 102, 0.1);
+        backdrop-filter: blur(15px);
+        @include flex($js : space-between);
+        border-radius: 25px;
+
+        .logo {
+            img {
+                width: 150px;
+            }
+        }
+
+        .nav-links {
+            ul {
+                @include flex($js : start, $g : 15px);
+                padding: 0;
+
+                @include responsive(350) {
+                    @include position($b : 0%, $l : 0);
+                    @include flex($js : start, $g : 15px, $direction : column);
+                    @include size(280px);
+                    transform: translate(0%, 100%);
+                    background-color: rgb(217, 255, 102, 0.3);
+                    backdrop-filter: blur(15px);
+                    padding: 15px 0px;
+                }
+
+                @include responsive(850) {
+                    @include position($p : initial ,$b : initial, $l :initial );
+                    @include flex($js : start, $g : 15px, $direction : row);
+                    @include size(initial);
+                    backdrop-filter: initial;
+                    transform: translate(0%, 0%);
+                    background: transparent;
+                    padding:0px;
+                }
+
+                li {
+                    &.active {
+                        a {
+                            color: $primary-color;
+
+                            &::after {
+                                transform: scaleX(1);
+                                transform-origin: left;
+                            }
+                        }
+                    }
+
+                    a {
+                        position: relative;
+
+                        &::after {
+                            content: "";
+                            @include position($b: -5px, $l: 0, $z: 2);
+                            display: block;
+                            @include size(100%, 3px);
+
+                            border-radius: 15px;
+
+                            background: linear-gradient(to left,
+                                    $primary-color,
+                                    transparent);
+
+                            transform: scaleX(0);
+                            transform-origin: left;
+
+                            transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+                        }
+
+                        &:hover {
+                            &::after {
+                                transform: scaleX(1);
+                                transform-origin: left;
+                            }
+                        }
+
+                        &:not(:hover) {
+                            &::after {
+                                transform-origin: right;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        .content {
+            @include flex($js : start, $g : 15px);
+
+            .mood,
+            .account {
+                @include size(35px, 35px);
+                @include flex();
+                background-color: $primary-color;
+                border-radius: 50%;
+                transition-duration: .5s;
+                cursor: pointer;
+
+                i {
+                    transition-duration: .5s;
+                }
+
+                &:hover {
+                    transform: translateY(-2px);
+                }
+            }
+
+
+            button.mainButton {
+                padding: 5px;
+                transition-duration: .5s;
+                border-radius: 25px;
+
+                &:hover {
+                    transform: translateY(-2px);
+                }
+            }
+
+        }
+    }
+}

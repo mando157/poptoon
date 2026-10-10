@@ -1,73 +1,75 @@
 // 
 
-async function getMovies(page = 1) {
+async function getMovies() {
 
-    let movieURL = new URLSearchParams({
-        api_key: "6fe664a1e43c55e5453cf014dd4dadc8",
-        with_genres: "16,10751",
-        append_to_response: "videos",
-        without_genres: "27,53",
-        include_adult: "false",
-        sort_by: "popularity.desc",
-        page: page,
+    // let movieURL = new URLSearchParams({
+    //     api_key: "6fe664a1e43c55e5453cf014dd4dadc8",
+    //     with_genres: "16,10751",
+    //     append_to_response: "videos",
+    //     without_genres: "27,53",
+    //     include_adult: "false",
+    //     sort_by: "popularity.desc",
+    //     page: page,
 
-        "vote_count.gte": 100,
-        "vote_average.gte": 6,
-        "vote_average.lte": 10,
-    });
+    //     "vote_count.gte": 100,
+    //     "vote_average.gte": 6,
+    //     "vote_average.lte": 10,
+    // });
 
     let respond = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?${movieURL.toString()}`
+        `https://mando157.github.io/moviesJSON/data/cartoon.json`
     );
 
     let movieData = await respond.json();
 
-    for (let movie of movieData.results) {
-        let trailer = await getMoreDetails(movie.id , "trailer");
-        let tagline = await getMoreDetails(movie.id , "tagline");
+    // for (let movie of movieData.results) {
+    //     let trailer = await getMoreDetails(movie.id , "trailer");
+    //     let tagline = await getMoreDetails(movie.id , "tagline");
 
-        movie.trailer = trailer;
-        movie.tagline = tagline;
+    //     movie.trailer = trailer;
+    //     movie.tagline = tagline;
     
-    }
+    // }
 
-    showTopMovieData(movieData.results);
+    // showTopMovieData(movieData.Top);
+    console.log(movieData.Top);
 
 }
 
 
-async function getMoreDetails(id , item = "") {
-    let detailsURL = new URLSearchParams({
-        api_key: "6fe664a1e43c55e5453cf014dd4dadc8",
-        append_to_response: "videos"
-    });
+// async function getMoreDetails(id , item = "") {
+//     // let detailsURL = new URLSearchParams({
+//     //     api_key: "6fe664a1e43c55e5453cf014dd4dadc8",
+//     //     append_to_response: "videos"
+//     // });
 
-    let response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?${detailsURL.toString()}`
-    );
+//     let response = await fetch(
+//         `https://mando157.github.io/moviesJSON/data/cartoon.json`
+//     );
     
-    let movieDetails = await response.json();
+//     let movieDetails = await response.json();
 
-    console.log(movieDetails);
+//     console.log(movieDetails.Top);
 
-    if(item == "trailer"){
-        let trailer = movieDetails.videos.results.find(
-            video => video.type === "Trailer" && video.site === "YouTube"
-        );
+//     // if(item == "trailer"){
+//     //     let trailer = movieDetails.videos.results.find(
+//     //         video => video.type === "Trailer" && video.site === "YouTube"
+//     //     );
     
-        return trailer ? trailer.key : null;
-    }
+//     //     return trailer ? trailer.key : null;
+//     // }
 
-    if(item == "tagline"){
-        let tagline = movieDetails.tagline;
+//     // if(item == "tagline"){
+//     //     let tagline = movieDetails.tagline;
 
-        return tagline ? tagline : null;
-    }
+//     //     return tagline ? tagline : null;
+//     // }
 
-}
+// }
 
 
 // * Top Rated Movies
+
 function showTopMovieData(data) {
     let counter = 0;
 
@@ -86,7 +88,7 @@ function carousalItemComponent(movie, index) {
     if (movie.vote_average >= 8.3) {
         return `
         <div class="carousel-item ${index == 0 ? "active" : ""}" data-bs-interval="10000">
-            <img src="https://image.tmdb.org/t/p/w500${movie.backdrop_path}" class="d-block h-100" alt="${movie.title}">
+            <img src="https://image.tmdb.org/t/p/original${movie.images.backdrops[0].file_path}" class="d-block h-100" alt="${movie.title}">
 
             <div class="container h-100 position-relative">
                 <div class="carousel-caption">
@@ -96,7 +98,7 @@ function carousalItemComponent(movie, index) {
                                 <p>${movie.overview}</p>
                                 <i class="fa-solid fa-caret-right fa-fade"></i>
                             </div>
-                            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+                            <img src="https://image.tmdb.org/t/p/original${movie.images.posters[0].file_path}" alt="${movie.title}">
                         </div>
 
                         <div class="text">
@@ -127,7 +129,7 @@ function carousalItemButtonComponent(movie, index) {
         return `
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="${index}"
                 class="${index === 0 ? "active" : ""} image" aria-current="true" aria-label="Slide ${index}">
-                <img src="https://image.tmdb.org/t/p/w500${movie.backdrop_path}" class="d-block" alt="hero">
+                <img src="https://image.tmdb.org/t/p/original${movie.images.backdrops[0].file_path}" class="d-block" alt="hero">
             </button>
         `
     }

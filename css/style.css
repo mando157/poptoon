@@ -53,6 +53,156 @@ section {
   margin: 0px 5px 0px 5px;
 }
 
+nav {
+  position: fixed;
+  top: 10px;
+  right: initial;
+  bottom: initial;
+  left: initial;
+  z-index: 999;
+  width: 100%;
+  height: auto;
+}
+nav .container {
+  position: relative;
+  background-color: rgba(217, 255, 102, 0.1);
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+  border-radius: 25px;
+}
+nav .container .logo img {
+  width: 150px;
+}
+nav .container .nav-links ul {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+  padding: 0;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  nav .container .nav-links ul {
+    position: absolute;
+    top: initial;
+    right: initial;
+    bottom: 0%;
+    left: 0;
+    z-index: initial;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    width: 280px;
+    height: auto;
+    transform: translate(0%, 100%);
+    background-color: rgba(217, 255, 102, 0.3);
+    backdrop-filter: blur(15px);
+    padding: 15px 0px;
+  }
+}
+nav .container .nav-links ul {
+  /* 850 */
+}
+@media (min-width: 769px) and (max-width: 1300px) {
+  nav .container .nav-links ul {
+    position: initial;
+    top: initial;
+    right: initial;
+    bottom: initial;
+    left: initial;
+    z-index: initial;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 15px;
+    width: initial;
+    height: auto;
+    backdrop-filter: initial;
+    transform: translate(0%, 0%);
+    background: transparent;
+    padding: 0px;
+  }
+}
+nav .container .nav-links ul li.active a {
+  color: #B8F500;
+}
+nav .container .nav-links ul li.active a::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+nav .container .nav-links ul li a {
+  position: relative;
+}
+nav .container .nav-links ul li a::after {
+  content: "";
+  position: absolute;
+  top: initial;
+  right: initial;
+  bottom: -5px;
+  left: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 3px;
+  border-radius: 15px;
+  background: linear-gradient(to left, #B8F500, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+nav .container .nav-links ul li a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+nav .container .nav-links ul li a:not(:hover)::after {
+  transform-origin: right;
+}
+nav .container .content {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+}
+nav .container .content .mood,
+nav .container .content .account {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+  background-color: #B8F500;
+  border-radius: 50%;
+  transition-duration: 0.5s;
+  cursor: pointer;
+}
+nav .container .content .mood i,
+nav .container .content .account i {
+  transition-duration: 0.5s;
+}
+nav .container .content .mood:hover,
+nav .container .content .account:hover {
+  transform: translateY(-2px);
+}
+nav .container .content button.mainButton {
+  padding: 5px;
+  transition-duration: 0.5s;
+  border-radius: 25px;
+}
+nav .container .content button.mainButton:hover {
+  transform: translateY(-2px);
+}
+
 #Home .carousel .scroll-pages {
   position: absolute;
   top: initial;
@@ -173,7 +323,7 @@ section {
   transform: translateY(-50%);
 }
 #Home .carousel .carousel-inner .carousel-item .carousel-caption .box {
-  width: 280px;
+  width: 250px;
   height: auto;
 }
 #Home .carousel .carousel-inner .carousel-item .carousel-caption .box .image {
@@ -205,8 +355,8 @@ section {
 #Home .carousel .carousel-inner .carousel-item .carousel-caption .box .image .overview i {
   position: absolute;
   top: initial;
-  right: 10px;
-  bottom: 10px;
+  right: 5px;
+  bottom: 5px;
   left: initial;
   z-index: initial;
   color: #B8F500;
