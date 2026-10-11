@@ -1,14 +1,14 @@
 @use "../abstracts/" as *;
 
 nav {
-    @include position($p : fixed, $t : 10px, $z : 999);
+    @include position($p: fixed, $t: 10px, $z: 999);
     @include size();
-    
+
     .container {
         position: relative;
-        background-color: rgb(217, 255, 102, 0.1);
+        background-color: rgba(204, 251, 241, 0.1);
         backdrop-filter: blur(15px);
-        @include flex($js : space-between);
+        @include flex($js: space-between);
         border-radius: 25px;
 
         .logo {
@@ -19,33 +19,40 @@ nav {
 
         .nav-links {
             ul {
-                @include flex($js : start, $g : 15px);
+                @include flex($js: start, $g: 15px);
                 padding: 0;
+                border-radius: $border-r;
 
                 @include responsive(350) {
-                    @include position($b : 0%, $l : 0);
-                    @include flex($js : start, $g : 15px, $direction : column);
+                    @include position($b: 0%, $l: -100%);
+                    @include flex($js: start, $g: 15px, $direction: column);
                     @include size(280px);
                     transform: translate(0%, 100%);
-                    background-color: rgb(217, 255, 102, 0.3);
+                    background-color: rgba(204, 251, 241, 0.3);
                     backdrop-filter: blur(15px);
                     padding: 15px 0px;
+                    transition-duration: .5s;
+
+                    &.open {
+                        @include position($b: 0%, $l: 50%);
+                        transform: translate(-50%, 100%);
+                    }
                 }
 
                 @include responsive(850) {
-                    @include position($p : initial ,$b : initial, $l :initial );
-                    @include flex($js : start, $g : 15px, $direction : row);
+                    @include position($p: initial, $b: initial, $l: initial);
+                    @include flex($js: start, $g: 15px, $direction: row);
                     @include size(initial);
                     backdrop-filter: initial;
                     transform: translate(0%, 0%);
                     background: transparent;
-                    padding:0px;
+                    padding: 0px;
                 }
 
                 li {
                     &.active {
                         a {
-                            color: $primary-color;
+                            color: var(--primary-color);
 
                             &::after {
                                 transform: scaleX(1);
@@ -66,7 +73,7 @@ nav {
                             border-radius: 15px;
 
                             background: linear-gradient(to left,
-                                    $primary-color,
+                                    var(--primary-color),
                                     transparent);
 
                             transform: scaleX(0);
@@ -87,26 +94,26 @@ nav {
                                 transform-origin: right;
                             }
                         }
-
                     }
                 }
             }
         }
 
         .content {
-            @include flex($js : start, $g : 15px);
+            @include flex($js: start, $g: 15px);
 
             .mood,
             .account {
                 @include size(35px, 35px);
                 @include flex();
-                background-color: $primary-color;
+                background-color: var(--primary-color);
                 border-radius: 50%;
-                transition-duration: .5s;
+                transition-duration: 0.5s;
                 cursor: pointer;
 
                 i {
-                    transition-duration: .5s;
+                    transition-duration: 0.5s;
+                    color: #fff;
                 }
 
                 &:hover {
@@ -114,17 +121,28 @@ nav {
                 }
             }
 
+            .nav-toggle {
+                background-color: transparent;
+                @include size(35px, 25px);
+                @include flex($js : space-evenly, $direction : column);
+                border: none;
 
-            button.mainButton {
-                padding: 5px;
-                transition-duration: .5s;
-                border-radius: 25px;
+                span {
+                    display: block;
+                    background-color: var(--primary-color);
+                    @include size(100%, 3px);
 
-                &:hover {
-                    transform: translateY(-2px);
+                    animation: .8s fullWidth infinite alternate;
+                }
+
+                span:nth-of-type(2) {
+                    animation: 1s .2s fullWidth infinite alternate;
+                }
+
+                span:nth-of-type(3) {
+                    animation: 1s .4s fullWidth infinite alternate;
                 }
             }
-
         }
     }
 }
