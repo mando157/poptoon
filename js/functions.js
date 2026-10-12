@@ -17,6 +17,8 @@ function showTopMovieData(data) {
         $(".carousel-inner").append(carousalItemComponent(movie, counter));
         $(".carousel-indicators .content").append(carousalItemButtonComponent(movie, counter));
 
+        $("#Top .swiper-wrapper").append(swiperSlideComponent(movie));
+
         if (movie.vote_average >= 8) {
             counter++;
         }
@@ -65,6 +67,7 @@ function carousalItemButtonComponent(movie, index) {
     }
 }
 
+// * Mood
 $(".nav-toggle").on("click", function () {
     $(".nav-links ul").toggleClass("open");
 });
@@ -72,7 +75,6 @@ $(".nav-toggle").on("click", function () {
 $("section , header").click(function () {
     $(".nav-links ul").removeClass("open");
 });
-
 
 $(".mood").on("click", function () {
     const body = document.querySelector("body");
@@ -90,3 +92,22 @@ $(".mood").on("click", function () {
         $(".mood i").removeClass("fa-sun");
     }
 });
+
+
+// * Top Rated Section
+
+function swiperSlideComponent(movie) {
+    return `
+        <div class="swiper-slide">
+            <div class="slide-card">
+                <img src="https://image.tmdb.org/t/p/original${movie.images.posters[0].file_path}" alt="movie">
+                
+                <div class="layout layout-1"></div>                                
+                
+                <a href="https://www.youtube.com/watch?v=${movie.videos.results[0].key}"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
+                
+                <div class="layout layout-2"></div>
+            </div>
+        </div>
+    `
+}

@@ -6,6 +6,7 @@ body {
     font-family: "Instrument Sans";
     transition: background-color 0.3s ease, color 0.3s ease;
     height: 5000px;
+    background-color: var(--surface);
 }
 
 html {
@@ -63,6 +64,23 @@ section {
                 margin: 0px 5px 0px 5px;
             }
         }
+    }
+
+}
+
+.title {
+    @include flex($js : start, $g :15px);
+    padding: 15px 0px;
+
+    h2 {
+        font-size: clamp(25px, 6vw, 50px);
+        font-weight: 700;
+        letter-spacing: -2px;
+        margin: 0;
+
+        color: var(--text);
+
+        text-shadow: var(--text-shadow);
     }
 
 }

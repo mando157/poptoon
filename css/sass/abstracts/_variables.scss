@@ -19,7 +19,7 @@ $border-r : 10px;
 
     --dark-color: #E5EEEA;
     --background: #F5F8F6;
-    --surface: #FFFFFF;
+    --surface: rgb(15, 159, 145, 0.1);
     --surface-hover: #EAF2EE;
 
     --text: #172522;
@@ -29,6 +29,11 @@ $border-r : 10px;
 
     --accent-color: #D9FF66;
     --rating-color: #B7791F;
+
+    --text-shadow:
+        0 0 8px rgba(15, 159, 145, 0.35),
+        0 0 20px rgba(15, 159, 145, 0.25),
+        0 0 40px rgba(15, 159, 145, 0.15);
 }
 
 /* * Dark Theme */
@@ -51,4 +56,10 @@ $border-r : 10px;
 
     --accent-color: #D9FF66;
     --rating-color: #FBBF24;
+    
+    --text-shadow:
+        0 0 8px rgba(20, 184, 166, 0.55),
+        0 0 20px rgba(20, 184, 166, 0.4),
+        0 0 40px rgba(20, 184, 166, 0.25),
+        0 0 65px rgba(217, 255, 102, 0.15);
 }
