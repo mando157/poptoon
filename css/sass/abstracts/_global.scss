@@ -12,6 +12,7 @@ body {
 html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--surface);
 }
 
 h1,
@@ -83,4 +84,18 @@ section {
         text-shadow: var(--text-shadow);
     }
 
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
 }

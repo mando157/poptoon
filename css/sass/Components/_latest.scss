@@ -1,0 +1,97 @@
+@use "../abstracts/" as *;
+
+#Latest {
+    min-height: 100svh;
+
+    .content {
+        .part-1 {
+            position: relative;
+
+            ul {
+                @include flex($js : start, $direction : column, $g : 15px);
+                @include size(100%, auto);
+                max-height: 500px;
+                padding: 20px 0px;
+                overflow-y: auto;
+
+                @include responsive(350) {
+                    max-height: 200px;
+                }
+
+                @include responsive(650) {
+                    max-height: 300px;
+                }
+
+                @include responsive(850) {
+                    max-height: 350px;
+                }
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                li {
+                    @include size(100%, auto);
+
+                    button {
+                        @include size(100%, auto);
+                        @include flex($js : start, $g : 15px);
+                        background-color: transparent;
+                        padding: 10px;
+                        border-radius: $border-r;
+                        border: 1px solid var(--primary-light);
+                        border-left: 8px solid var(--primary-light);
+                        box-shadow: var(--box-shadow);
+
+                        img {
+                            max-width: 100px;
+                            min-width: 80px;
+                        }
+
+                        span {
+                            text-transform: capitalize;
+                            color: var(--text);
+                            font-size: 20px;
+                            letter-spacing: 1px;
+                            font-weight: 600;
+
+                            text-shadow: var(--text-shadow);
+                        }
+                    }
+                }
+
+            }
+
+            >i {
+                @include position($b : 5%, $r : -10px);
+                color: var(--primary-light);
+                font-size: 20px;
+            }
+        }
+
+        .part-2 {
+            padding: 20px 0px 0px 20px;
+            position: relative;
+
+            img {
+                position: relative;
+                display: block;
+                @include size(100%);
+                border-radius: $border-r;
+            }
+
+            .text {
+                padding: 10px 20px;
+                color: var(--text);
+
+                p {
+                    color: var(--accent-color);
+                }
+            }
+
+        }
+    }
+}

@@ -8,58 +8,60 @@
 
 $border-r : 10px;
 
-/* * Light Theme */
 :root,
 [data-theme="light"] {
     color-scheme: light;
 
-    --primary-color: rgb(15, 159, 145);
-    --primary-hover: #0D9488;
-    --primary-light: rgb(204, 251, 241);
+    --primary-color: #0F8F86;
+    --primary-hover: #0B766E;
+    --primary-light: #08524D;
 
-    --dark-color: #E5EEEA;
-    --background: #F5F8F6;
-    --surface: rgb(15, 159, 145, 0.1);
-    --surface-hover: #EAF2EE;
+    --dark-color: #D9E0DF;
+    --background: #EFF2F1;
+    --surface: #E4E9E8;
+    --surface-hover: #DAE1DF;
 
-    --text: #172522;
-    --text-muted: #e2e2e2;
+    --text: #151C1E;
+    --text-muted: #5D6B6E;
 
-    --border-color: #DCE6E0;
+    --border-color: #CBD4D3;
 
-    --accent-color: #D9FF66;
-    --rating-color: #B7791F;
+    --accent-color: #F28C38;
+    --rating-color: #C77A0A;
 
-    --text-shadow:
-        0 0 8px rgba(15, 159, 145, 0.35),
-        0 0 20px rgba(15, 159, 145, 0.25),
-        0 0 40px rgba(15, 159, 145, 0.15);
+    --box-shadow:
+        rgba(21, 28, 30, 0.12) 0px 18px 24px -6px,
+        rgba(21, 28, 30, 0.05) 0px 8px 10px -5px;
 }
 
 /* * Dark Theme */
 [data-theme="dark"] {
     color-scheme: dark;
 
-    --primary-color: #14B8A6;
-    --primary-hover: #2DD4BF;
-    --primary-light: #5EEAD4;
+    --primary-color: #2BB5A8;
+    --primary-hover: #4FCFC3;
+    --primary-light: #8CE6DD;
 
-    --dark-color: #263B38;
-    --background: #080C0B;
-    --surface: #121917;
-    --surface-hover: #1B2420;
+    --dark-color: #1E2A2D;
+    --background: #0B1013;
+    --surface: #121A1D;
+    --surface-hover: #1A2529;
 
-    --text: #F4F7F5;
-    --text-muted: #e2e2e2;
+    --text: #EAF0EF;
+    --text-muted: #98A9AC;
 
-    --border-color: #29352F;
+    --border-color: #25343A;
 
-    --accent-color: #D9FF66;
-    --rating-color: #FBBF24;
-    
+    --accent-color: #FF9A4D;
+    --rating-color: #FFB347;
+
     --text-shadow:
-        0 0 8px rgba(20, 184, 166, 0.55),
-        0 0 20px rgba(20, 184, 166, 0.4),
-        0 0 40px rgba(20, 184, 166, 0.25),
-        0 0 65px rgba(217, 255, 102, 0.15);
+        0 0 8px rgba(43, 181, 168, 0.4),
+        0 0 20px rgba(43, 181, 168, 0.26),
+        0 0 40px rgba(255, 154, 77, 0.12);
+
+    --box-shadow:
+        0 0 8px rgba(43, 181, 168, 0.32),
+        0 0 20px rgba(43, 181, 168, 0.2),
+        0 0 40px rgba(255, 154, 77, 0.1);
 }

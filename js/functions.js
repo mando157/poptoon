@@ -1,12 +1,20 @@
 async function getMovies() {
-    let respond = await fetch(
+    let movies = await fetch(
         `https://mando157.github.io/moviesJSON/data/cartoon.json`
     );
 
-    let movieData = await respond.json();
+    let allMovies = await fetch(
+        `https://mando157.github.io/moviesJSON/data/allMovies.json`
+    );
+
+    let movieData = await movies.json();
+
+    let allMovieData = await allMovies.json();
 
     showTopMovieData(movieData.Top);
-    console.log(movieData.Top);
+    // console.log(movieData.Movies);
+    showLatestMovies(allMovieData.AllMovies);
+    console.log(allMovieData.AllMovies);
 
 }
 
@@ -104,10 +112,80 @@ function swiperSlideComponent(movie) {
                 
                 <div class="layout layout-1"></div>                                
                 
-                <a href="https://www.youtube.com/watch?v=${movie.videos.results[0].key}"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
+                <a href="#"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
                 
                 <div class="layout layout-2"></div>
             </div>
+        </div>
+    `
+}
+
+// * Latest Section
+let allMoviesData = [],
+    isFirstMovie = true;
+
+function showLatestMovies(data) {
+    allMoviesData = data;
+
+    data.forEach(function (movie) {
+        if (movie.release_date.slice(0, 4) >= 2025) {
+            $("#Latest .part-1 ul").append(LatestButtonComponent(movie));
+            
+            if(isFirstMovie){
+                $("#Latest .part-2").html(LatestDetailsComponent(movie));
+                isFirstMovie = false;
+            }
+        }
+    });
+}
+
+function LatestButtonComponent(movie) {
+    return `
+        <li>
+            <button class="movie-button" onclick="changeMovieDetails(this)" data-id="${movie.id}">
+                <img src="https://image.tmdb.org/t/p/original${movie.images.logos[0].file_path}" alt="movie" class="img-fluid">
+                <span class="name">${movie.title}</span>
+            </button>
+        </li>
+    `
+}
+
+function changeMovieDetails(that) {
+    let currentId = that.getAttribute("data-id");
+
+    let currentMovie = allMoviesData.find(function (movie) {
+        return movie.id == currentId;
+    });
+
+    $("#Latest .part-2").html("");
+
+    if (currentMovie) {
+        $("#Latest .part-2").html(LatestDetailsComponent(currentMovie));
+    }
+}
+
+function LatestDetailsComponent(movie) {
+    return `
+        <img src="https://image.tmdb.org/t/p/original${movie.images.backdrops[1].file_path}" alt="movieBackDrop">
+
+        <div class="text">
+            <h3 class="name">${movie.title}</h3>
+            <p class="overview">
+                <span class="date">
+                    ${movie.release_date.slice(0, 4)}
+                </span>
+                |
+                <span>
+                    ${movie.overview.slice(0, 120)} ...
+                </span>
+            </p>
+
+            <a href="https://www.youtube.com/watch?v=${movie.videos.results[0].key}" target="_blank" class="mainButton">
+                <span>
+                    <i class="fa-solid fa-play"></i>
+                    Watch Trailer
+                </span>
+            </a>
         </div>
     `
 }
