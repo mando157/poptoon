@@ -13,7 +13,7 @@
   --border-color: #CBD4D3;
   --accent-color: #F28C38;
   --rating-color: #C77A0A;
-  --nav-back: rgba(0, 0, 0, 0.4);
+  --nav-back: rgba(255, 255, 255, 0.3);
   --footer-back: rgba(2, 23, 21, 0.2);
   --box-shadow:
       rgba(21, 28, 30, 0.12) 0px 18px 24px -6px,
@@ -159,8 +159,11 @@ section {
   border-radius: 25px;
   transition-duration: 0.5s;
 }
+#Nav .container .logo {
+  padding: 10px;
+}
 #Nav .container .logo img {
-  width: 150px;
+  width: 120px;
 }
 #Nav .container .nav-links ul {
   display: flex;
@@ -241,6 +244,12 @@ section {
 #Nav .container .nav-links ul li.active a::before {
   top: -2px;
 }
+#Nav .container .nav-links ul li a {
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: var(--text-shadow);
+}
 #Nav .container .nav-links ul li a::after, #Nav .container .nav-links ul li a::before {
   content: "";
   position: absolute;
@@ -286,6 +295,7 @@ section {
   gap: 15px;
 }
 #Nav .container .content .mood,
+#Nav .container .content .favorites,
 #Nav .container .content .account {
   width: 35px;
   height: 35px;
@@ -294,19 +304,32 @@ section {
   align-items: center;
   flex-direction: row;
   gap: 0px;
-  background-color: var(--primary-color);
   border-radius: 50%;
   transition-duration: 0.5s;
   cursor: pointer;
 }
 #Nav .container .content .mood i,
+#Nav .container .content .favorites i,
 #Nav .container .content .account i {
   transition-duration: 0.5s;
   color: #fff;
 }
 #Nav .container .content .mood:hover,
+#Nav .container .content .favorites:hover,
 #Nav .container .content .account:hover {
   transform: translateY(-2px);
+}
+#Nav .container .content .favorites {
+  background-color: rgb(253, 31, 31);
+}
+#Nav .container .content .account {
+  background-color: var(--accent-color);
+}
+#Nav .container .content .mood {
+  background-color: var(--surface);
+}
+#Nav .container .content .mood i {
+  color: var(--text);
 }
 #Nav .container .content .nav-toggle {
   background-color: transparent;

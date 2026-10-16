@@ -95,9 +95,11 @@ $(".mood").on("click", function () {
     if (body.getAttribute("data-theme") === "light") {
         $(".mood i").addClass("fa-sun");
         $(".mood i").removeClass("fa-moon");
+        $(".logo img").attr("src" , "./images/light_logo.png");
     } else {
         $(".mood i").addClass("fa-moon");
         $(".mood i").removeClass("fa-sun");
+        $(".logo img").attr("src" , "./images/dark_logo.png");
     }
 });
 
