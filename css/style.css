@@ -14,6 +14,7 @@
   --accent-color: #F28C38;
   --rating-color: #C77A0A;
   --nav-back: rgba(0, 0, 0, 0.4);
+  --footer-back: rgba(2, 23, 21, 0.2);
   --box-shadow:
       rgba(21, 28, 30, 0.12) 0px 18px 24px -6px,
       rgba(21, 28, 30, 0.05) 0px 8px 10px -5px;
@@ -35,6 +36,7 @@
   --accent-color: #FF9A4D;
   --rating-color: #FFB347;
   --nav-back: rgba(204, 251, 241, 0.1);
+  --footer-back: rgba(204, 251, 241, 0.1);
   --text-shadow:
       0 0 8px rgba(43, 181, 168, 0.4),
       0 0 20px rgba(43, 181, 168, 0.26),
@@ -49,7 +51,6 @@ body {
   overflow-x: hidden;
   font-family: "Instrument Sans";
   transition: background-color 0.3s ease, color 0.3s ease;
-  height: 5000px;
   background-color: var(--surface);
 }
 
@@ -1057,6 +1058,90 @@ section {
   border-radius: 50%;
   color: var(--text);
   cursor: pointer;
+}
+
+footer {
+  color: var(--text);
+  padding-top: 50px;
+  background-color: var(--footer-back);
+}
+footer .container .part-1 .logo img {
+  width: 150px;
+}
+footer .container .part-1 p {
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+footer .container .part-2 h4 {
+  font-size: 20px;
+}
+footer .container .part-2 ul li {
+  position: relative;
+  color: var(--text-muted);
+  cursor: pointer;
+  margin-bottom: 5px;
+  width: fit-content;
+}
+footer .container .part-2 ul li::after {
+  content: "";
+  position: absolute;
+  top: initial;
+  right: initial;
+  bottom: -2px;
+  left: 0;
+  z-index: initial;
+  width: 0%;
+  height: 2px;
+  border-radius: 15px;
+  background-color: var(--text-muted);
+  transition-duration: 0.5s;
+}
+footer .container .part-2 ul li:hover::after {
+  width: 100%;
+  height: 2px;
+}
+footer .container .part-2 ul li a {
+  color: var(--text-muted);
+}
+footer .container .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  padding: 25px 0px;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  footer .container .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+footer .container .footer {
+  /* 850 */
+}
+@media (min-width: 769px) and (max-width: 1300px) {
+  footer .container .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 0px;
+  }
+}
+footer .container .footer p {
+  margin: 0;
+}
+footer .container .footer p span {
+  color: var(--text-muted);
+}
+footer .container .footer p .poptoon {
+  color: var(--primary-light);
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=style.css.map */

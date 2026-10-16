@@ -1,0 +1,85 @@
+@use "../abstracts/" as *;
+
+footer {
+    color: var(--text);
+    padding-top: 50px;
+    background-color: var(--footer-back);
+
+    .container {
+
+        .part-1 {
+            .logo {
+                img {
+                    width: 150px;
+                }
+            }
+
+            p {
+                color: var(--text-muted);
+                margin-top: 10px;
+            }
+        }
+
+        .part-2 {
+            h4 {
+                font-size: 20px;
+            }
+
+            ul {
+                li {
+                    position: relative;
+                    color: var(--text-muted);
+                    cursor: pointer;
+                    margin-bottom: 5px;
+                    width: fit-content;
+
+                    &::after {
+                        content: "";
+                        @include position($b : -2px, $l : 0);
+                        @include size(0%, 2px);
+                        border-radius: 15px;
+                        background-color: var(--text-muted);
+                        transition-duration: .5s;
+                    }
+
+                    &:hover {
+                        &::after {
+                            @include size(100%, 2px);
+                        }
+                    }
+
+                    a {
+                        color: var(--text-muted);
+                    }
+                }
+            }
+        }
+
+        .footer {
+            @include flex($js : space-between, $g : 10px);
+            padding: 25px 0px;
+
+            @include responsive(350) {
+                @include flex($js : center, $direction : column, $g : 10px);
+            }
+
+            @include responsive(850) {
+                @include flex($js : space-between, $direction : row);
+            }
+
+            p {
+                margin: 0;
+
+                span {
+                    color: var(--text-muted);
+                }
+
+                .poptoon {
+                    color: var(--primary-light);
+                    font-weight: 600;
+                }
+
+            }
+        }
+    }
+}
