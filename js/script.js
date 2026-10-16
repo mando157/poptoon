@@ -2,7 +2,7 @@ getMovies();
 
 // * Swiper JS
 const swiper = new Swiper(".swiper", {
-    slidesPerView: 4,
+    slidesPerView: 1,
     speed: 700,
     centeredSlides: true,
 

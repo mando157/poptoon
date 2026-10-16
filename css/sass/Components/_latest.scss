@@ -37,7 +37,7 @@
                     @include size(100%, auto);
 
                     button {
-                        @include size(100%, auto);
+                        @include size(100%, 75px);
                         @include flex($js : start, $g : 15px);
                         background-color: transparent;
                         padding: 10px;
@@ -47,8 +47,9 @@
                         box-shadow: var(--box-shadow);
 
                         img {
-                            max-width: 100px;
-                            min-width: 80px;
+                            display: block;
+                            max-width: 60px;
+                            width: 100%;
                         }
 
                         span {

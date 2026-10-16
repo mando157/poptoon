@@ -1,15 +1,16 @@
 @use "../abstracts/" as *;
 
-nav {
+#Nav {
     @include position($p: fixed, $t: 10px, $z: 999);
     @include size();
 
     .container {
         position: relative;
-        background-color: rgba(204, 251, 241, 0.1);
+        background-color: var(--nav-back);
         backdrop-filter: blur(15px);
         @include flex($js: space-between);
         border-radius: 25px;
+        transition-duration: .5s;
 
         .logo {
             img {
@@ -50,50 +51,69 @@ nav {
                 }
 
                 li {
+                    position: relative;
+
                     &.active {
                         a {
-                            color: var(--primary-color);
+                            &::after,
+                            &::before {
+                                @include size(100%, 3px);
+                                opacity: 1;
+                            }
 
                             &::after {
-                                transform: scaleX(1);
-                                transform-origin: left;
+                                bottom: -2px;
+                            }
+
+                            &::before {
+                                top: -2px;
                             }
                         }
                     }
 
                     a {
-                        position: relative;
+
+                        &::after,
+                        &::before {
+                            content: "";
+                            @include position($l : 50%);
+                            transform: translateX(-50%);
+                            display: block;
+                            opacity: 0;
+                            background-color: var(--primary-color);
+                            @include size(150%, 3px);
+                            transition-duration: .5s;
+                            transition-delay: box-shadow .5s;
+                            border-radius: 10px;
+                        }
 
                         &::after {
-                            content: "";
-                            @include position($b: -5px, $l: 0, $z: 2);
-                            display: block;
-                            @include size(100%, 3px);
+                            bottom: -10px;
+                            box-shadow: 0px -5px 10px var(--primary-color);
+                        }
 
-                            border-radius: 15px;
-
-                            background: linear-gradient(to left,
-                                    var(--primary-color),
-                                    transparent);
-
-                            transform: scaleX(0);
-                            transform-origin: left;
-
-                            transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+                        &::before {
+                            top: -10px;
+                            box-shadow: 0px 5px 10px var(--primary-color);
                         }
 
                         &:hover {
+
+                            &::after,
+                            &::before {
+                                @include size(100%, 3px);
+                                opacity: 1;
+                            }
+
                             &::after {
-                                transform: scaleX(1);
-                                transform-origin: left;
+                                bottom: -2px;
+                            }
+
+                            &::before {
+                                top: -2px;
                             }
                         }
 
-                        &:not(:hover) {
-                            &::after {
-                                transform-origin: right;
-                            }
-                        }
                     }
                 }
             }

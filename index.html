@@ -43,7 +43,7 @@
 <body data-theme="dark">
 
     <!--* Navbar Section *-->
-    <nav>
+    <nav id="Nav">
         <div class="container">
             <div class="logo">
                 <img src="./images/dark_logo.png" alt="logo">
@@ -53,7 +53,6 @@
                     <li class="link active"><a href="#Home">Home</a></li>
                     <li class="link"><a href="#Top">Top Rated</a></li>
                     <li class="link"><a href="#Latest">Latest</a></li>
-                    <li class="link"><a href="#Trending">Trending</a></li>
                     <li class="link"><a href="#Categories">Categories</a></li>
                 </ul>
             </div>
@@ -147,11 +146,150 @@
         </div>
     </section>
 
+    <img src="./images/film-divider-light.svg" height="20px" width="100%" alt="film-divider">
+
+    <!--* Categories Section *-->
+    <section id="Categories">
+        <div class="container">
+
+            <div class="title align-items-end">
+                <img src="./images/popcorn.svg" width="" height="80" alt="clapperboard">
+                <h2>Categories</h2>
+            </div>
+
+            <div class="content pt-3 content-categories-data" data-category="action">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-action-tab" data-bs-toggle="pill"
+                            onclick="changeCategory('action')" data-bs-target="#pills-action" type="button" role="tab"
+                            aria-controls="pills-action" aria-selected="true">
+                            <h4 class="py-2">Action</h4>
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-adventure-tab" data-bs-toggle="pill"
+                            onclick="changeCategory('adventure')" data-bs-target="#pills-adventure" type="button"
+                            role="tab" aria-controls="pills-adventure" aria-selected="false">
+                            <h4 class="py-2">Adventure</h4>
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-animation-tab" data-bs-toggle="pill"
+                            onclick="changeCategory('animation')" data-bs-target="#pills-animation" type="button"
+                            role="tab" aria-controls="pills-animation" aria-selected="false">
+                            <h4 class="py-2">Animation</h4>
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-comedy-tab" data-bs-toggle="pill"
+                            onclick="changeCategory('comedy')" data-bs-target="#pills-comedy" type="button" role="tab"
+                            aria-controls="pills-comedy" aria-selected="false">
+                            <h4 class="py-2">Comedy</h4>
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-family-tab" data-bs-toggle="pill"
+                            onclick="changeCategory('family')" data-bs-target="#pills-family" type="button" role="tab"
+                            aria-controls="pills-family" aria-selected="false">
+                            <h4 class="py-2">Family</h4>
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-fantasy-tab" data-bs-toggle="pill"
+                            onclick="changeCategory('fantasy')" data-bs-target="#pills-fantasy" type="button" role="tab"
+                            aria-controls="pills-fantasy" aria-selected="false">
+                            <h4 class="py-2">Fantasy</h4>
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-scienceFiction-tab" data-bs-toggle="pill"
+                            onclick="changeCategory('science')" data-bs-target="#pills-scienceFiction" type="button"
+                            role="tab" aria-controls="pills-scienceFiction" aria-selected="false">
+                            <h4 class="py-2">Science</h4>
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-action" role="tabpanel"
+                        aria-labelledby="pills-action-tab" tabindex="0">
+                        <div class="content">
+
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-adventure" role="tabpanel"
+                        aria-labelledby="pills-adventure-tab" tabindex="0">
+                        <div class="content">
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-animation" role="tabpanel"
+                        aria-labelledby="pills-animation-tab" tabindex="0">
+                        <div class="content">
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-comedy" role="tabpanel" aria-labelledby="pills-comedy-tab"
+                        tabindex="0">
+                        <div class="content">
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-family" role="tabpanel" aria-labelledby="pills-family-tab"
+                        tabindex="0">
+                        <div class="content">
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-fantasy" role="tabpanel" aria-labelledby="pills-fantasy-tab"
+                        tabindex="0">
+                        <div class="content">
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-scienceFiction" role="tabpanel"
+                        aria-labelledby="pills-science-tab" tabindex="0">
+                        <div class="content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="pagination-nav" aria-label="Page navigation example">
+                <div class="prv pagination-button" onclick="toPrevPage()">
+                    <p class="page-link m-0" aria-label="Previous">
+                        <span aria-hidden="true">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </span>
+                    </p>
+                </div>
+
+                <ul class="pagination">
+                </ul>
+                
+                <div class="next pagination-button" onclick="toNextPage()">
+                    <p class="page-link m-0" aria-label="Next">
+                        <span aria-hidden="true">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </span>
+                    </p>
+                </div>
+            </nav>
+        </div>
+    </section>
+
 
     <!-- ! ________________ JS ________________ ! -->
 
     <!--?------ jQuery ------?-->
-    <script src="./js/jquery.js"></script>
+    <script src=" ./js/jquery.js"></script>
 
     <!--?------ Global Functions ------?-->
     <script src="./js/functions.js"></script>
