@@ -150,6 +150,7 @@ section {
 #Nav .container {
   position: relative;
   background-color: var(--nav-back);
+  -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
   display: flex;
   justify-content: space-between;
@@ -182,7 +183,7 @@ section {
     right: initial;
     bottom: 0%;
     left: -100%;
-    z-index: initial;
+    z-index: 1000;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -191,9 +192,8 @@ section {
     width: 280px;
     height: auto;
     transform: translate(0%, 100%);
-    background-color: rgba(204, 251, 241, 0.3);
-    backdrop-filter: blur(15px);
-    padding: 15px 0px;
+    background-color: rgba(43, 181, 168, 0.8);
+    padding: 15px 0;
     transition-duration: 0.5s;
   }
   #Nav .container .nav-links ul.open {
@@ -860,16 +860,17 @@ section {
 }
 #Categories .content .tab-content .tab-pane .content {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   flex-direction: row;
-  gap: 15px;
+  gap: 20px;
   flex-wrap: wrap;
   padding: 20px 0px;
   row-gap: 25px;
+  width: 100%;
 }
 #Categories .content .tab-content .tab-pane .content .box {
-  width: calc(20% - 15px);
+  flex-basis: calc((100% - 80px) / 5);
   position: relative;
   overflow: hidden;
   border-radius: 10px;
@@ -877,7 +878,7 @@ section {
 }
 @media (max-width: 1300px) {
   #Categories .content .tab-content .tab-pane .content .box {
-    width: 280px;
+    flex-basis: 280px;
     margin: auto;
   }
 }
@@ -886,7 +887,7 @@ section {
 }
 @media (min-width: 371px) and (max-width: 1300px) {
   #Categories .content .tab-content .tab-pane .content .box {
-    width: 320px;
+    flex-basis: 320px;
     margin: auto;
   }
 }
@@ -895,7 +896,7 @@ section {
 }
 @media (min-width: 577px) and (max-width: 1300px) {
   #Categories .content .tab-content .tab-pane .content .box {
-    width: calc(50% - 15px);
+    flex-basis: calc((100% - 20px) / 2);
     margin: 0;
   }
 }
@@ -904,7 +905,7 @@ section {
 }
 @media (min-width: 992px) and (max-width: 1300px) {
   #Categories .content .tab-content .tab-pane .content .box {
-    width: calc(33.3333333333% - 15px);
+    flex-basis: calc((100% - 40px) / 3);
   }
 }
 #Categories .content .tab-content .tab-pane .content .box {
@@ -912,7 +913,7 @@ section {
 }
 @media (min-width: 1181px) and (max-width: 1300px) {
   #Categories .content .tab-content .tab-pane .content .box {
-    width: calc(25% - 15px);
+    flex-basis: calc((100% - 60px) / 4);
   }
 }
 #Categories .content .tab-content .tab-pane .content .box img {

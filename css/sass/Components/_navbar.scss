@@ -7,6 +7,7 @@
     .container {
         position: relative;
         background-color: var(--nav-back);
+        -webkit-backdrop-filter: blur(15px);
         backdrop-filter: blur(15px);
         @include flex($js: space-between);
         border-radius: 25px;
@@ -27,14 +28,16 @@
                 border-radius: $border-r;
 
                 @include responsive(350) {
-                    @include position($b: 0%, $l: -100%);
+                    @include position($b: 0%, $l: -100%, $z: 1000);
                     @include flex($js: start, $g: 15px, $direction: column);
                     @include size(280px);
+
                     transform: translate(0%, 100%);
-                    background-color: rgba(204, 251, 241, 0.3);
-                    backdrop-filter: blur(15px);
-                    padding: 15px 0px;
-                    transition-duration: .5s;
+
+                    background-color: rgba(43, 181, 168, 0.8);
+
+                    padding: 15px 0;
+                    transition-duration: 0.5s;
 
                     &.open {
                         @include position($b: 0%, $l: 50%);
@@ -57,6 +60,7 @@
 
                     &.active {
                         a {
+
                             &::after,
                             &::before {
                                 @include size(100%, 3px);
@@ -77,7 +81,7 @@
                         color: var(--text);
                         font-weight: 600;
                         letter-spacing: 1px;
-                        text-shadow:var(--text-shadow);
+                        text-shadow: var(--text-shadow);
 
                         &::after,
                         &::before {
@@ -147,15 +151,18 @@
                 }
             }
 
-            .favorites{
+            .favorites {
                 background-color: rgb(253, 31, 31);
             }
-            .account{
+
+            .account {
                 background-color: var(--accent-color);
             }
-            .mood{
-                background-color:var(--surface);
-                i{
+
+            .mood {
+                background-color: var(--surface);
+
+                i {
                     color: var(--text);
                 }
             }

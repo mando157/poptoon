@@ -1,3 +1,5 @@
+let nav = document.querySelector("#Nav"),
+    navLinks = document.querySelectorAll("#Nav .nav-links ul a");
 getMovies();
 
 // * Swiper JS
@@ -17,10 +19,6 @@ const swiper = new Swiper(".swiper", {
         clickable: true, dynamicBullets: false,
     },
 
-    mousewheel: {
-        invert: true,
-    },
-
     effect: "coverflow",
 
     coverflowEffect: {
@@ -36,4 +34,22 @@ const swiper = new Swiper(".swiper", {
         576: { slidesPerView: 2 },
         992: { slidesPerView: 4 },
     },
+});
+
+// * Navbar
+window.addEventListener("scroll", function () {
+    navLinks.forEach(function (link) {
+        let currentActive = document.querySelector("#Nav .nav-links ul li.active"),
+            currentId = link.getAttribute("href"),
+            currentSection = document.querySelector(currentId),
+            topOfSection = currentSection.offsetTop - nav.clientHeight,
+            bottomOfSection = topOfSection + currentSection.clientHeight;
+
+        if (window.scrollY >= topOfSection && window.scrollY < bottomOfSection) {
+            currentActive.classList.remove("active");
+
+            link.parentElement.classList.add("active");
+        }
+
+    });
 });
