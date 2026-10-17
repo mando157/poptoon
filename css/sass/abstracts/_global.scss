@@ -4,14 +4,20 @@
 body {
     overflow-x: hidden;
     font-family: "Instrument Sans";
-    transition: background-color 0.3s ease, color 0.3s ease;
-    background-color: var(--surface);
+    transition: background 0.3s ease-in-out, color 0.3s ease;
+    background: var(--surface);
+
+    ::selection {
+        background-color: rgb(43, 181, 168, 0.8);
+        backdrop-filter: blur(10px);
+        color: #121212;
+    }
 }
 
 html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: var(--primary-color) var(--surface);
+    scrollbar-color: var(--primary-color) var(--dark-color);
 }
 
 h1,

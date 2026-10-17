@@ -1,12 +1,12 @@
 :root,
 [data-theme=light] {
   color-scheme: light;
-  --primary-color: #0F8F86;
+  --primary-color: #0f8f86;
   --primary-hover: #0B766E;
   --primary-light: #08524D;
   --dark-color: #D9E0DF;
   --background: #EFF2F1;
-  --surface: #E4E9E8;
+  --surface: linear-gradient(to left, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
   --surface-hover: #DAE1DF;
   --text: #151C1E;
   --text-muted: #5D6B6E;
@@ -28,7 +28,13 @@
   --primary-light: #8CE6DD;
   --dark-color: #1E2A2D;
   --background: #0B1013;
-  --surface: #121A1D;
+  --surface: linear-gradient(
+      to left,
+      #0B1012,
+      #121A1D,
+      #1C292D,
+      #0B1012
+  );
   --surface-hover: #1A2529;
   --text: #EAF0EF;
   --text-muted: #98A9AC;
@@ -50,14 +56,19 @@
 body {
   overflow-x: hidden;
   font-family: "Instrument Sans";
-  transition: background-color 0.3s ease, color 0.3s ease;
-  background-color: var(--surface);
+  transition: background 0.3s ease-in-out, color 0.3s ease;
+  background: var(--surface);
+}
+body ::selection {
+  background-color: rgba(43, 181, 168, 0.8);
+  backdrop-filter: blur(10px);
+  color: #121212;
 }
 
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--primary-color) var(--surface);
+  scrollbar-color: var(--primary-color) var(--dark-color);
 }
 
 h1,
@@ -326,7 +337,7 @@ section {
   background-color: var(--accent-color);
 }
 #Nav .container .content .mood {
-  background-color: var(--surface);
+  background: var(--surface);
 }
 #Nav .container .content .mood i {
   color: var(--text);
@@ -777,6 +788,11 @@ section {
   color: var(--accent-color);
 }
 
+#Categories .title .search {
+  width: 50px;
+  margin-left: auto;
+  cursor: pointer;
+}
 #Categories .content .nav-pills {
   justify-content: space-between;
   flex-wrap: wrap;
@@ -1166,6 +1182,504 @@ footer .container .footer p span {
 footer .container .footer p .poptoon {
   color: var(--primary-light);
   font-weight: 600;
+}
+
+#Movie {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+}
+#Movie .carousel .carousel-inner .carousel-item {
+  height: 100svh;
+}
+#Movie .carousel .carousel-inner .carousel-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: initial;
+  bottom: initial;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#Movie .carousel .carousel-inner .carousel-item > img {
+  position: absolute;
+  top: 50%;
+  right: initial;
+  bottom: initial;
+  left: 50%;
+  z-index: initial;
+  min-width: 100%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 5s ease;
+  z-index: 1;
+}
+#Movie .carousel .carousel-inner .carousel-item.active > img {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+#Movie .movie-details {
+  position: absolute;
+  top: 50%;
+  right: initial;
+  bottom: initial;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: auto;
+  transform: translateY(-50%);
+}
+#Movie .movie-details .part-1 .poster {
+  overflow: hidden;
+  border-radius: 10px;
+  width: 300px;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  #Movie .movie-details .part-1 .poster {
+    width: 200px;
+  }
+}
+#Movie .movie-details .part-1 .poster {
+  /* 650 */
+}
+@media (min-width: 577px) and (max-width: 1300px) {
+  #Movie .movie-details .part-1 .poster {
+    width: 230px;
+  }
+}
+#Movie .movie-details .part-1 .poster {
+  /* 1050 */
+}
+@media (min-width: 992px) and (max-width: 1300px) {
+  #Movie .movie-details .part-1 .poster {
+    width: 280px;
+  }
+}
+#Movie .movie-details .part-1 .poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#Movie .movie-details .part-2 .content {
+  color: #fff;
+}
+#Movie .movie-details .part-2 .content h2 {
+  font-size: clamp(30px, 6vw, 60px);
+  font-weight: 700;
+  letter-spacing: -2px;
+  background: linear-gradient(100deg, #fff 0%, #10B981 40%, #D9FF66 70%, #000 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+#Movie .movie-details .part-2 .content .tagline,
+#Movie .movie-details .part-2 .content .overview {
+  color: #ddd;
+}
+#Movie .movie-details .part-2 .content .details ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  #Movie .movie-details .part-2 .content .details ul {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+#Movie .movie-details .part-2 .content .details ul {
+  /* 650 */
+}
+@media (min-width: 577px) and (max-width: 1300px) {
+  #Movie .movie-details .part-2 .content .details ul {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 15px;
+  }
+}
+#Movie .movie-details .part-2 .content .details ul {
+  /* 1050 */
+}
+@media (min-width: 992px) and (max-width: 1300px) {
+  #Movie .movie-details .part-2 .content .details ul {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+  }
+}
+#Movie .movie-details .part-2 .content .details ul li {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 5px 15px;
+  border-radius: 8px;
+  margin: 10px 0px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 2px;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  #Movie .movie-details .part-2 .content .details ul li {
+    font-size: 12px;
+  }
+}
+#Movie .movie-details .part-2 .content .details ul li {
+  /* 650 */
+}
+@media (min-width: 577px) and (max-width: 1300px) {
+  #Movie .movie-details .part-2 .content .details ul li {
+    font-size: 14px;
+  }
+}
+#Movie .movie-details .part-2 .content .details ul li .star {
+  color: #FFC107;
+}
+#Movie .movie-details .part-2 .content .details ul li .calendar-days {
+  color: #000;
+}
+#Movie .movie-details .part-2 .content .details ul li .clock {
+  color: rgb(43, 181, 168);
+}
+#Movie .movie-details .part-2 .content .details ul li.category {
+  background-color: rgba(43, 181, 168, 0.5);
+  font-weight: 500;
+}
+#Movie .movie-details .part-2 .content .overview {
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  #Movie .movie-details .part-2 .content .overview {
+    font-size: 12px;
+  }
+}
+#Movie .movie-details .part-2 .content .overview {
+  /* 650 */
+}
+@media (min-width: 577px) and (max-width: 1300px) {
+  #Movie .movie-details .part-2 .content .overview {
+    font-size: 14px;
+  }
+}
+#Movie .movie-details .part-2 .content .overview {
+  /* 1050 */
+}
+@media (min-width: 992px) and (max-width: 1300px) {
+  #Movie .movie-details .part-2 .content .overview {
+    font-size: 16px;
+  }
+}
+#Movie .movie-details .part-2 .content .buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+}
+#Movie .movie-details .part-2 .content .buttons * {
+  border: none;
+}
+#Movie .movie-details .part-2 .content .buttons button {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.popup[data-popup=search] {
+  position: fixed;
+  top: 0;
+  right: initial;
+  bottom: initial;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.popup[data-popup=search] > img {
+  position: fixed;
+  top: 50%;
+  right: initial;
+  bottom: initial;
+  left: 50%;
+  z-index: initial;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+}
+.popup[data-popup=search] .popup-element {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--nav-back);
+  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px);
+  padding: 20px 0px;
+  overflow-y: scroll;
+  height: 100%;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+  transform: translateY(100%);
+}
+.popup[data-popup=search] .popup-element.appear {
+  transition-delay: 2.1s;
+  transform: translateY(0%);
+}
+.popup[data-popup=search] .popup-element > p {
+  font-size: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 5px 15px;
+  border-radius: 8px;
+  margin: 10px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+  width: fit-content;
+  margin: 20px 20px 20px auto;
+  cursor: pointer;
+}
+.popup[data-popup=search] .popup-element::-webkit-scrollbar {
+  display: none;
+}
+.popup[data-popup=search] .popup-element {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.popup[data-popup=search] .popup-element .search .input-group {
+  justify-content: center;
+  margin: 0px;
+}
+.popup[data-popup=search] .popup-element .search .input-group .input-group-text {
+  background-color: rgba(15, 143, 134, 0.2);
+  backdrop-filter: blur(10px);
+  border: var(--bs-border-width) solid var(--primary-color);
+  border-right: none;
+  border-radius: 25px 0px 0px 25px;
+}
+.popup[data-popup=search] .popup-element .search .input-group .input-group-text i {
+  color: var(--text);
+}
+.popup[data-popup=search] .popup-element .search .input-group input.form-control {
+  background-color: rgba(15, 143, 134, 0.2);
+  backdrop-filter: blur(10px);
+  max-width: 400px;
+  border: var(--bs-border-width) solid var(--primary-color);
+  border-left: none;
+  border-radius: 0px 25px 25px 0px;
+  margin-left: 0 !important;
+  color: var(--text);
+}
+.popup[data-popup=search] .popup-element .search .input-group input.form-control:focus-visible {
+  box-shadow: none;
+}
+.popup[data-popup=search] .popup-element .search .input-group input.form-control::placeholder {
+  color: var(--text);
+}
+.popup[data-popup=search] .popup-element .search .content {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px 0px;
+  margin-bottom: 40px;
+  row-gap: 25px;
+  width: 100%;
+}
+.popup[data-popup=search] .popup-element .search .content > img {
+  position: absolute;
+  top: 50%;
+  right: initial;
+  bottom: initial;
+  left: 50%;
+  z-index: initial;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: auto;
+}
+.popup[data-popup=search] .popup-element .search .content .box {
+  flex-basis: calc((100% - 80px) / 5);
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  .popup[data-popup=search] .popup-element .search .content .box {
+    flex-basis: 280px;
+    margin: auto;
+  }
+}
+.popup[data-popup=search] .popup-element .search .content .box {
+  /* 450 */
+}
+@media (min-width: 371px) and (max-width: 1300px) {
+  .popup[data-popup=search] .popup-element .search .content .box {
+    flex-basis: 320px;
+    margin: auto;
+  }
+}
+.popup[data-popup=search] .popup-element .search .content .box {
+  /* 650 */
+}
+@media (min-width: 577px) and (max-width: 1300px) {
+  .popup[data-popup=search] .popup-element .search .content .box {
+    flex-basis: calc((100% - 20px) / 2);
+    margin: 0;
+  }
+}
+.popup[data-popup=search] .popup-element .search .content .box {
+  /* 1050 */
+}
+@media (min-width: 992px) and (max-width: 1300px) {
+  .popup[data-popup=search] .popup-element .search .content .box {
+    flex-basis: calc((100% - 40px) / 3);
+  }
+}
+.popup[data-popup=search] .popup-element .search .content .box {
+  /* 1250 */
+}
+@media (min-width: 1181px) and (max-width: 1300px) {
+  .popup[data-popup=search] .popup-element .search .content .box {
+    flex-basis: calc((100% - 60px) / 4);
+  }
+}
+.popup[data-popup=search] .popup-element .search .content .box img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.popup[data-popup=search] .popup-element .search .content .box .back-rate {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  bottom: initial;
+  left: initial;
+  z-index: initial;
+  transform: translate(50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--primary-color);
+}
+.popup[data-popup=search] .popup-element .search .content .box .rate {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: initial;
+  left: initial;
+  z-index: initial;
+  background-color: #B8F500;
+  color: #506D00;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+  border-radius: 50%;
+  text-shadow: var(--text-shadow);
+}
+.popup[data-popup=search] .popup-element .search .content .box .rate h6 {
+  margin: 0;
+}
+.popup[data-popup=search] .popup-element .search .content .box .layout {
+  position: absolute;
+  top: 0%;
+  right: initial;
+  bottom: initial;
+  left: 0%;
+  z-index: initial;
+  width: 50%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+  transition: all 1s, border 1s 1s;
+}
+.popup[data-popup=search] .popup-element .search .content .box .layout-1 {
+  transform: translate(-100%, 0);
+  border-right: 1px solid var(--primary-color);
+}
+.popup[data-popup=search] .popup-element .search .content .box .layout-2 {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  bottom: initial;
+  left: initial;
+  z-index: initial;
+  border-left: 1px solid var(--primary-color);
+  transform: translate(100%, 0);
+}
+.popup[data-popup=search] .popup-element .search .content .box a {
+  position: absolute;
+  top: 50%;
+  right: initial;
+  bottom: initial;
+  left: 50%;
+  z-index: 4;
+  transform: translate(-50%, -50%) scale(1);
+  font-size: 16px;
+  background-color: var(--primary-color);
+  padding: 5px 15px;
+  border-radius: 10px;
+  opacity: 0;
+  text-shadow: var(--text-shadow);
+  text-transform: capitalize;
+}
+.popup[data-popup=search] .popup-element .search .content .box a:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.popup[data-popup=search] .popup-element .search .content .box:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+.popup[data-popup=search] .popup-element .search .content .box:hover img {
+  transform: scale(1.08);
+}
+.popup[data-popup=search] .popup-element .search .content .box:hover .layout {
+  border-color: transparent;
+}
+.popup[data-popup=search] .popup-element .search .content .box:hover .layout-1 {
+  transform: translate(0%, 0);
+}
+.popup[data-popup=search] .popup-element .search .content .box:hover .layout-2 {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  bottom: initial;
+  left: initial;
+  z-index: initial;
+  transform: translate(0%, 0);
+}
+.popup[data-popup=search] .popup-element .search .content .box:hover a {
+  opacity: 1;
+  transition: transform 0.3s, opacity 0.5s 1s;
 }
 
 /*# sourceMappingURL=style.css.map */

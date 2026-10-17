@@ -16,8 +16,12 @@ async function getMovies() {
     showLatestMovies(allMovieData.AllMovies);
 
     console.log(allMovieData.AllMovies)
+
+    search(allMovieData.AllMovies);
+
 }
 
+// * Top Section
 function showTopMovieData(data) {
     let counter = 0;
 
@@ -95,11 +99,13 @@ $(".mood").on("click", function () {
     if (body.getAttribute("data-theme") === "light") {
         $(".mood i").addClass("fa-sun");
         $(".mood i").removeClass("fa-moon");
-        $(".logo img").attr("src" , "./images/light_logo.png");
+        $(".logo img").attr("src", "./images/light_logo.png");
+        $("#Categories .title .search").attr("src", "./images/light_search.gif");
     } else {
         $(".mood i").addClass("fa-moon");
         $(".mood i").removeClass("fa-sun");
-        $(".logo img").attr("src" , "./images/dark_logo.png");
+        $(".logo img").attr("src", "./images/dark_logo.png");
+        $("#Categories .title .search").attr("src", "./images/dark_search.gif");
     }
 });
 
@@ -114,7 +120,7 @@ function swiperSlideComponent(movie) {
                 
                 <div class="layout layout-1"></div>                                
                 
-                <a href="#"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
+                <a href="../pages/movie.html?id=${movie.id}"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
                 
                 <div class="layout layout-2"></div>
             </div>
@@ -128,6 +134,7 @@ let allMoviesData = [],
     pages = [],
     currentPage = 1;
 
+// * Latest Section
 function showLatestMovies(data) {
     let category = document.querySelector("#Categories .content-categories-data").getAttribute("data-category")
     allMoviesData = data;
@@ -201,6 +208,7 @@ function LatestDetailsComponent(movie) {
     `
 }
 
+// * Categories Section
 function CategoriesCardComponent(movie, index) {
     return `
         <div class="box" data-index="${index}">
@@ -216,10 +224,10 @@ function CategoriesCardComponent(movie, index) {
 
             <div class="layout layout-1"></div>
 
-            <a href="#"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
+            <a href="../pages/movie.html?id=${movie.id}"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
 
             <div class="layout layout-2"></div>
-        </div> 
+        </div>
     `
 }
 
@@ -239,7 +247,6 @@ function preparePagination(index) {
 
     $(".pagination-nav .pagination").html(li);
 }
-
 
 function showCategoryMovies() {
     let category = $("#Categories .content-categories-data").attr("data-category");
@@ -312,9 +319,49 @@ function toPrevPage() {
     if (currentPage > 1) {
         currentPage = currentPage - 1;
     } else {
-        currentPage = (Math.ceil(pages.length / 5)) ;
+        currentPage = (Math.ceil(pages.length / 5));
     }
 
     showPage();
 
+}
+
+// * Search Popup
+let input = document.querySelector(".popup[data-popup='search'] .input");
+
+function search(data) {
+    input.addEventListener("keyup", function () {
+        let inputValue = input.value.trim().toLowerCase();
+
+        let filteredMovies = data.filter(function (movie) {
+            let title = movie.title.toLowerCase(),
+                overview = movie.overview.toLowerCase(),
+                keywordMatch = movie.keywords.keywords.some(function (key) {
+                    return key.name.toLowerCase().includes(inputValue);
+                });
+
+            return (
+                title.includes(inputValue) ||
+                overview.includes(inputValue) ||
+                keywordMatch
+            );
+        });
+
+        let content = $(".popup[data-popup='search'] .search .content");
+
+        content.empty();
+
+        filteredMovies.forEach(function (movie) {
+            content.append(CategoriesCardComponent(movie));
+        });
+
+        if (inputValue == "" || filteredMovies.length == 0) {
+            content.html('<img src="./images/no-videos.svg" alt="no-videos">');
+        }
+    });
+}
+
+function emptySearch() {
+    input.value = "";
+    $(".popup[data-popup='search'] .search .content").html('<img src="./images/no-videos.svg" alt="no-videos">');
 }

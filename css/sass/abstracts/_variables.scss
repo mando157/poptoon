@@ -12,13 +12,14 @@ $border-r : 10px;
 [data-theme="light"] {
     color-scheme: light;
 
-    --primary-color: #0F8F86;
+    --primary-color: #0f8f86;
     --primary-hover: #0B766E;
     --primary-light: #08524D;
 
     --dark-color: #D9E0DF;
     --background: #EFF2F1;
-    --surface: #E4E9E8;
+    --surface: linear-gradient(to left, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+;
     --surface-hover: #DAE1DF;
 
     --text: #151C1E;
@@ -47,7 +48,13 @@ $border-r : 10px;
 
     --dark-color: #1E2A2D;
     --background: #0B1013;
-    --surface: #121A1D;
+    --surface: linear-gradient(
+    to left,
+    #0B1012,
+    #121A1D,
+    #1C292D,
+    #0B1012
+);;
     --surface-hover: #1A2529;
 
     --text: #EAF0EF;

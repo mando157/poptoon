@@ -53,3 +53,26 @@ window.addEventListener("scroll", function () {
 
     });
 });
+
+// * Search
+
+$("#Categories .title .search").click(function () {
+    $(".popup[data-popup='search']").fadeIn(1);
+    document.querySelector(".popup[data-popup='search'] > img").setAttribute("src", "./images/rope.svg");
+    $(".popup[data-popup='search'] .popup-element").addClass("appear");
+
+    setTimeout(function () {
+        document.querySelector(".popup[data-popup='search'] > img").setAttribute("src", "");
+    }, 3600);
+});
+
+$(".popup[data-popup='search'] .popup-element > p").click(function () {
+
+    $(".popup[data-popup='search'] .popup-element").removeClass("appear");
+
+    setTimeout(function(){
+        $(".popup[data-popup='search']").fadeOut(500);
+    } , 2100)
+    
+    document.querySelector(".popup[data-popup='search'] > img").setAttribute("src", "");
+});

@@ -1,6 +1,14 @@
 @use "../abstracts/" as *;
 
 #Categories {
+    .title{
+        .search{
+            width: 50px;
+            margin-left: auto;
+            cursor: pointer;
+        }
+    }
+
     .content {
 
         .nav-pills {
