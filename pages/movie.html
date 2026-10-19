@@ -40,19 +40,20 @@
 
 <body>
     <section id="Movie" class="p-0">
-        <!-- 
+
         <nav>
             <div class="container">
                 <div class="logo">
-                    
-                    <img src="../images/light_logo.png" alt="logo">
+                    <a href="../index.html"><i class="fa-solid fa-arrow-left"></i></a>
+                    <img src="../images/dark_logo.png" alt="logo">
                 </div>
 
-                <p><i class="fa-solid fa-caret-left"></i> <span>Reviews</span></p>
+                <p class="m-0"><i class="fa-solid fa-caret-left"></i> <span>Reviews</span></p>
             </div>
-        </nav> -->
+        </nav>
 
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-pause="false" data-bs-ride="carousel">
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-pause="false"
+            data-bs-ride="carousel">
             <div class="carousel-inner">
             </div>
         </div>
@@ -64,6 +65,25 @@
             </div>
         </div>
     </section>
+
+    <div class="popup" data-popup="reviews" onclick="closePopup()">
+
+        <img src="">
+
+        <div class="popup-element">
+            <i class="fa-solid fa-xmark" onclick="closePopup()"></i>
+
+            <h3>Movie Reviews</h3>
+
+            <div class="content">
+                <!-- <div class="box">
+                    <h5 class="author"> ...</h5>
+                    <p class="review"></p>
+                    <span class="date">2021-03-01 | 17:10</span>
+                </div> -->
+            </div>
+        </div>
+    </div>
 
     <!-- ! ________________ JS ________________ ! -->
 

@@ -303,13 +303,13 @@ section {
   justify-content: start;
   align-items: center;
   flex-direction: row;
-  gap: 15px;
+  gap: 7px;
 }
 #Nav .container .content .mood,
 #Nav .container .content .favorites,
 #Nav .container .content .account {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -323,6 +323,7 @@ section {
 #Nav .container .content .favorites i,
 #Nav .container .content .account i {
   transition-duration: 0.5s;
+  font-size: 14px;
   color: #fff;
 }
 #Nav .container .content .mood:hover,
@@ -331,7 +332,7 @@ section {
   transform: translateY(-2px);
 }
 #Nav .container .content .favorites {
-  background-color: rgb(253, 31, 31);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 #Nav .container .content .account {
   background-color: var(--accent-color);
@@ -1189,6 +1190,79 @@ footer .container .footer p .poptoon {
   height: 100svh;
   overflow: hidden;
 }
+#Movie nav {
+  position: fixed;
+  top: 0;
+  right: initial;
+  bottom: initial;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: auto;
+  background: transparent;
+  padding: 20px 0px;
+}
+#Movie nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+}
+#Movie nav .container .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+}
+#Movie nav .container .logo a {
+  position: relative;
+  overflow: hidden;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+#Movie nav .container .logo a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: initial;
+  bottom: initial;
+  left: 50%;
+  z-index: initial;
+  transform: translate(-50%, -50%);
+  width: 0%;
+  height: 0%;
+  background-color: var(--primary-color);
+  transition-duration: 0.5s;
+}
+#Movie nav .container .logo a i {
+  position: relative;
+  transition-duration: 0.5s;
+}
+#Movie nav .container .logo a:hover::before {
+  width: 100%;
+  height: 100%;
+}
+#Movie nav .container .logo a:hover i {
+  color: #000;
+}
+#Movie nav .container p {
+  color: #fff;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+#Movie nav .container p i {
+  transition-duration: 0.5s;
+  transform: rotate(-90deg);
+}
+#Movie nav .container p:hover i {
+  transform: rotate(0deg);
+  color: var(--primary-color);
+}
 #Movie .carousel .carousel-inner .carousel-item {
   height: 100svh;
 }
@@ -1402,6 +1476,125 @@ footer .container .footer p .poptoon {
 #Movie .movie-details .part-2 .content .buttons button {
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
+}
+
+.popup[data-popup=reviews] {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: initial;
+  bottom: initial;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.popup[data-popup=reviews] > img {
+  position: absolute;
+  top: initial;
+  right: initial;
+  bottom: 0;
+  left: 0;
+  z-index: initial;
+  width: 100%;
+  height: auto;
+}
+.popup[data-popup=reviews] .popup-element {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: initial;
+  left: initial;
+  z-index: initial;
+  transform: translateX(100%);
+  width: 450px;
+  height: 100%;
+  padding: 50px 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px);
+  transition-duration: 1.5s;
+  transition-timing-function: ease-in-out;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  .popup[data-popup=reviews] .popup-element {
+    width: 80%;
+    height: 100%;
+    max-width: 450px;
+  }
+}
+.popup[data-popup=reviews] .popup-element.appear {
+  transition-delay: 2.2s;
+  transform: translateX(0%);
+}
+.popup[data-popup=reviews] .popup-element > i {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  bottom: initial;
+  left: initial;
+  z-index: initial;
+  cursor: pointer;
+}
+.popup[data-popup=reviews] .popup-element h3 {
+  margin: auto;
+  width: fit-content;
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.popup[data-popup=reviews] .popup-element .content {
+  overflow-y: scroll;
+  height: 98%;
+  padding-bottom: 20px;
+  scrollbar-width: none;
+}
+.popup[data-popup=reviews] .popup-element .content .box {
+  color: #fff;
+  padding: 20px;
+  margin-bottom: 10px;
+  clip-path: polygon(2% 0, 48% 0, 50% 2%, 50% 13%, 52% 15%, 98% 15%, 100% 17%, 100% 98%, 98% 100%, 52% 100%, 50% 98%, 50% 82%, 48% 80%, 2% 80%, 0 78%, 0 2%);
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  .popup[data-popup=reviews] .popup-element .content .box {
+    clip-path: none;
+  }
+}
+.popup[data-popup=reviews] .popup-element .content .box {
+  /* 650 */
+}
+@media (min-width: 577px) and (max-width: 1300px) {
+  .popup[data-popup=reviews] .popup-element .content .box {
+    clip-path: polygon(2% 0, 48% 0, 50% 2%, 50% 13%, 52% 15%, 98% 15%, 100% 17%, 100% 98%, 98% 100%, 52% 100%, 50% 98%, 50% 82%, 48% 80%, 2% 80%, 0 78%, 0 2%);
+  }
+}
+.popup[data-popup=reviews] .popup-element .content .box {
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(25px);
+}
+.popup[data-popup=reviews] .popup-element .content .box h5 {
+  font-weight: 500;
+  color: var(--primary-light);
+  text-transform: capitalize;
+  font-weight: 700;
+  text-shadow: var(--text-shadow);
+}
+.popup[data-popup=reviews] .popup-element .content .box p {
+  max-height: 150px;
+  overflow: auto;
+  color: var(--text);
+  scrollbar-width: none;
+}
+.popup[data-popup=reviews] .popup-element .content .box span {
+  width: fit-content;
+  margin-left: auto;
+  display: block;
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 .popup[data-popup=search] {

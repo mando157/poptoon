@@ -13,10 +13,9 @@ async function showMovie() {
 
     let movie = allMovieData.AllMovies.find((movie) => movie.id == movieId);
 
-    console.log(movieId)
-    console.log(movie)
-
     showMovieDetails(movie);
+
+    showReview(movie);
 }
 
 showMovie();
@@ -44,7 +43,7 @@ function carouselItemComponent(movie) {
     return carouselItem;
 }
 
-function movieDetailsComponent(movie){
+function movieDetailsComponent(movie) {
     return `
         <div class="part-1 col-lg-4">
             <div class="poster">
@@ -61,7 +60,7 @@ function movieDetailsComponent(movie){
                 <div class="details">
                     <ul>
                         <li><i class="fa-regular fa-star star"></i> <span>${(movie.vote_average).toFixed(1)}</span></li>
-                        <li><i class="fa-regular fa-calendar-days calendar-days"></i> <span>${(movie.release_date).slice(0,4)}</span></li>
+                        <li><i class="fa-regular fa-calendar-days calendar-days"></i> <span>${(movie.release_date).slice(0, 4)}</span></li>
                         <li><i class="fa-regular fa-clock clock"></i> <span>${movie.runtime} min</span></li>
                         <li class="category">${(movie.genre).toUpperCase()}</li>
                     </ul>
@@ -90,4 +89,43 @@ function movieDetailsComponent(movie){
             </div>
         </div>
     `
+}
+
+$("#Movie nav p").click(function () {
+    $(" .popup[data-popup='reviews']").fadeIn(500, function () {
+        $(" .popup[data-popup='reviews'] > img").attr("src", "../images/car-chain.svg");
+        $(" .popup[data-popup='reviews'] .popup-element").addClass("appear");
+    });
+
+    setTimeout(function () {
+        $(" .popup[data-popup='reviews'] > img").attr("src", "");
+    }, 7500);
+});
+
+function closePopup() {
+    $(" .popup[data-popup='reviews'] .popup-element").removeClass("appear");
+    setTimeout(function () {
+        $(" .popup[data-popup='reviews']").fadeOut(500);
+    }, 1500);
+
+    $(" .popup[data-popup='reviews'] > img").attr("src", "");
+}
+
+document.querySelector(".popup-element").addEventListener("click", function (e) {
+    e.stopPropagation();
+});
+
+function showReview(movie) {
+    movie.reviews.results.forEach(review => {
+        $(".popup[data-popup='reviews'] .content").append(
+            `
+                <div class="box">
+                    <h5 class="author">${review.author}</h5>
+                    <p class="review">${review.content}</p>
+                    <span class="date">${(review.created_at).split("T")[0]} | ${(review.created_at).slice(11 , -4)}</span>
+                </div>
+            `
+        );
+    });
+
 }

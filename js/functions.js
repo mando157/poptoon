@@ -120,7 +120,7 @@ function swiperSlideComponent(movie) {
                 
                 <div class="layout layout-1"></div>                                
                 
-                <a href="../pages/movie.html?id=${movie.id}"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
+                <a href="./pages/movie.html?id=${movie.id}"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
                 
                 <div class="layout layout-2"></div>
             </div>
@@ -224,7 +224,7 @@ function CategoriesCardComponent(movie, index) {
 
             <div class="layout layout-1"></div>
 
-            <a href="../pages/movie.html?id=${movie.id}"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
+            <a href="./pages/movie.html?id=${movie.id}"><span>movie</span> <i class="fa-brands fa-empire fa-spin"></i></a>
 
             <div class="layout layout-2"></div>
         </div>

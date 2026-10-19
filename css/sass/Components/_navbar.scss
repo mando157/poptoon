@@ -130,19 +130,20 @@
         }
 
         .content {
-            @include flex($js: start, $g: 15px);
+            @include flex($js: start, $g: 7px);
 
             .mood,
             .favorites,
             .account {
-                @include size(35px, 35px);
+                @include size(30px, 30px);
                 @include flex();
                 border-radius: 50%;
                 transition-duration: 0.5s;
                 cursor: pointer;
-
+                
                 i {
                     transition-duration: 0.5s;
+                    font-size: 14px;
                     color: #fff;
                 }
 
@@ -152,7 +153,7 @@
             }
 
             .favorites {
-                background-color: rgb(253, 31, 31);
+                background-color: rgba(255 , 255 , 255 , .3);
             }
 
             .account {
