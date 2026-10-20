@@ -104,3 +104,122 @@ section {
     background: var(--primary-color);
     border-radius: 10px;
 }
+
+.list-toast {
+    background: rgba(11, 17, 19, 0.88) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(20, 184, 166, 0.25);
+    border-radius: 14px;
+    padding: 16px 18px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.35),
+        0 0 15px rgba(20, 184, 166, 0.06);
+
+    .list-toast__title {
+        color: #F5F5F5;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+    }
+
+    .list-toast__icon {
+        margin-inline-end: 12px;
+    }
+
+    .list-toast__progress {
+        height: 3px;
+        border-radius: 10px;
+        background: #14B8A6;
+    }
+
+    // Add to list
+    &--add {
+        border-color: rgba(20, 184, 166, 0.3);
+
+        .list-toast__progress {
+            background: #14B8A6 !important;
+        }
+
+        .list-toast__icon.swal2-success {
+            border-color: #14B8A6 !important;
+
+            [class^="swal2-success-line"] {
+                background-color: #14B8A6 !important;
+            }
+
+            .swal2-success-ring {
+                border-color: rgba(20, 184, 166, 0.25) !important;
+            }
+        }
+    }
+
+    // Remove from list
+    &--remove {
+        border-color: rgba(248, 113, 113, 0.3);
+
+        .list-toast__progress {
+            background: #F87171 !important;
+        }
+
+        .list-toast__icon.swal2-error {
+            border-color: #F87171 !important;
+
+            [class^="swal2-x-mark-line"] {
+                background-color: #F87171 !important;
+            }
+        }
+    }
+}
+
+@include responsive(350) {
+    .list-toast {
+        width: 200px;
+        padding: 10px 12px;
+
+        .list-toast__title {
+            font-size: 11px;
+        }
+    }
+}
+
+@include responsive(450) {
+    .list-toast {
+        width: 250px;
+        max-width: 320px;
+        padding: 12px 14px;
+        border-radius: 11px;
+
+        .list-toast__title {
+            font-size: 12px;
+            letter-spacing: 0.2px;
+        }
+
+        .list-toast__icon {
+            margin-inline-end: 8px;
+            transform: scale(0.9);
+        }
+
+        .list-toast__progress {
+            height: 2px;
+        }
+    }
+}
+
+@include responsive(650) {
+    .list-toast {
+        width: initial;
+        padding: 14px 16px;
+        border-radius: 12px;
+
+        .list-toast__title {
+            font-size: 13px;
+        }
+
+        .list-toast__icon {
+            margin-inline-end: 10px;
+        }
+    }
+}

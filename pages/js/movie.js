@@ -16,6 +16,9 @@ async function showMovie() {
     showMovieDetails(movie);
 
     showReview(movie);
+
+    listButtonToggler(movie);
+
 }
 
 showMovie();
@@ -79,10 +82,10 @@ function movieDetailsComponent(movie) {
                         </span>
                     </a>
 
-                    <button class="mainButton">
+                    <button class="list-button add" data-type="add">
                         <span>
-                            <i class="fa-solid fa-plus"></i>
-                            My list
+                            <i class="fa-solid fa-plus fa-shake"></i>
+                            Add to My list
                         </span>
                     </button>
                 </div>
@@ -102,19 +105,6 @@ $("#Movie nav p").click(function () {
     }, 7500);
 });
 
-function closePopup() {
-    $(" .popup[data-popup='reviews'] .popup-element").removeClass("appear");
-    setTimeout(function () {
-        $(" .popup[data-popup='reviews']").fadeOut(500);
-    }, 1500);
-
-    $(" .popup[data-popup='reviews'] > img").attr("src", "");
-}
-
-document.querySelector(".popup-element").addEventListener("click", function (e) {
-    e.stopPropagation();
-});
-
 function showReview(movie) {
     movie.reviews.results.forEach(review => {
         $(".popup[data-popup='reviews'] .content").append(
@@ -122,10 +112,95 @@ function showReview(movie) {
                 <div class="box">
                     <h5 class="author">${review.author}</h5>
                     <p class="review">${review.content}</p>
-                    <span class="date">${(review.created_at).split("T")[0]} | ${(review.created_at).slice(11 , -4)}</span>
+                    <span class="date">${(review.created_at).split("T")[0]} | ${(review.created_at).slice(11, -4)}</span>
                 </div>
             `
         );
     });
 
+}
+
+// * Add to List
+function addToList(movie) {
+    listContainer.push(movie);
+    updateLocalStorage();
+}
+
+function listButtonToggler(movie) {
+    let buttonToggle = document.querySelector("#Movie .list-button"),
+        isMovie = listContainer.some((thisMovie) => thisMovie.id == movie.id);
+
+    if (isMovie) {
+        removeButtonStyle(buttonToggle);
+    }
+
+    buttonToggle.addEventListener("click", function () {
+        if (buttonToggle.getAttribute("data-type") == "add") {
+            addToList(movie);
+
+            removeButtonStyle(buttonToggle);
+            alert("add");
+
+        } else if (buttonToggle.getAttribute("data-type") == "remove") {
+            removeToList(movie.id);
+            alert("remove");
+
+            buttonToggle.classList.remove("remove");
+            buttonToggle.classList.add("add");
+            buttonToggle.setAttribute("data-type", "add");
+            $(buttonToggle).html(
+                `
+                    <span>
+                        <i class="fa-solid fa-plus fa-shake"></i>
+                        Add to My list
+                    </span>
+                `
+            );
+        }
+    });
+}
+
+function removeButtonStyle(button) {
+    button.setAttribute("data-type", "remove");
+    $(button).html(
+        `
+            <span>
+                <i class="fa-solid fa-trash"></i>
+                Remove from list
+            </span>
+        `
+    );
+    button.classList.add("remove");
+    button.classList.remove("add");
+}
+
+// * Sweet Alert
+function alert(condition) {
+    if (condition == 'remove') {
+        Swal.mixin({
+            toast: true,
+            position: "bottom-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+
+            customClass: {
+                popup: `list-toast list-toast--remove`,
+                title: "list-toast__title",
+                icon: "list-toast__icon list-toast__icon--remove",
+                timerProgressBar: "list-toast__progress list-toast__progress--remove"
+            },
+
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        }).fire({
+            icon: "success",
+            title: "Removed successfully"
+        });
+
+    } else if (condition == 'add') {
+        removedAlert();
+    }
 }

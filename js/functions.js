@@ -1,3 +1,12 @@
+// * Variables
+let allMoviesData = [],
+    isFirstMovie = true,
+    pages = [],
+    currentPage = 1,
+
+    listContainer = [];
+
+// * Get Movies
 async function getMovies() {
     let movies = await fetch(
         `https://mando157.github.io/moviesJSON/data/top.json`
@@ -14,8 +23,6 @@ async function getMovies() {
     showTopMovieData(movieData.Top);
 
     showLatestMovies(allMovieData.AllMovies);
-
-    console.log(allMovieData.AllMovies)
 
     search(allMovieData.AllMovies);
 
@@ -129,11 +136,6 @@ function swiperSlideComponent(movie) {
 }
 
 // * Latest Section & Categories Section
-let allMoviesData = [],
-    isFirstMovie = true,
-    pages = [],
-    currentPage = 1;
-
 // * Latest Section
 function showLatestMovies(data) {
     let category = document.querySelector("#Categories .content-categories-data").getAttribute("data-category")
@@ -364,4 +366,115 @@ function search(data) {
 function emptySearch() {
     input.value = "";
     $(".popup[data-popup='search'] .search .content").html('<img src="./images/no-videos.svg" alt="no-videos">');
+}
+
+// * Close Popup
+function closePopup(popupName, duration) {
+    $(`.popup[data-popup='${popupName}'] .popup-element`).removeClass("appear");
+    setTimeout(function () {
+        $(`.popup[data-popup='${popupName}']`).fadeOut(500);
+    }, Number(duration));
+
+    $(" .popup[data-popup='reviews'] > img").attr("src", "");
+}
+
+$(".popup-element").click(function (e) {
+    e.stopPropagation();
+});
+
+// * Add to List & Remove From List
+
+if (localStorage.getItem('listContainer') == null) {
+    localStorage.setItem('listContainer', JSON.stringify([]));
+} else {
+    listContainer = JSON.parse(localStorage.getItem('listContainer'));
+}
+
+function updateLocalStorage() {
+    localStorage.setItem('listContainer', JSON.stringify(listContainer));
+}
+
+function removeToList(movieId, that) {
+    let indexOfMovie = listContainer.findIndex(
+        (movie) => movie.id == movieId
+    );
+
+    if (indexOfMovie != -1) {
+        listContainer.splice(indexOfMovie, 1);
+        $(that.closest(".box"))?.empty();
+    }
+
+    if (listContainer.length == 0) {
+        $("[data-popup='list'] #EmptyList").removeClass("d-none");
+    }
+    
+    updateLocalStorage();
+}
+
+// * Remove Alert Function
+function removedAlert() {
+    Swal.mixin({
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+
+        customClass: {
+            popup: `list-toast list-toast--add`,
+            title: "list-toast__title",
+            icon: "list-toast__icon list-toast__icon--add",
+            timerProgressBar: "list-toast__progress list-toast__progress--add"
+        },
+
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    }).fire({
+        icon: "success",
+        title: "Add successfully"
+    });
+}
+
+function showMyList() {
+    if (listContainer.length >= 1) {
+        $("[data-popup='list'] #EmptyList").addClass("d-none");
+    }
+
+    listContainer.forEach(function (movie) {
+        $(".popup[data-popup='list'] .popup-element .content").append(listCardComponent(movie));
+        updateLocalStorage();
+    })
+}
+
+function listCardComponent(movie) {
+    return `
+        <div class="box">
+            <div class="row w-100">
+                <div class="image col-3 p-0">
+                    <img src="https://image.tmdb.org/t/p/original${movie.images.posters[0].file_path}"
+                        class="img-fluid" alt="poster">
+                </div>
+                <div class="details col-9 py-4">
+                    <div class="text">
+                        <h5>${movie.title}</h5>
+                        <span class="tagline">${movie.tagline}</span>
+                    </div>
+
+                    <div class="buttons">
+                        <a href="./pages/movie.html?id=${movie.id}"><span>movie</span> <i
+                                class="fa-brands fa-empire fa-spin"></i></a>
+
+                        <button class="remove" onclick="removeToList(${movie.id} , this)">
+                            <span>
+                                <i class="fa-solid fa-trash"></i>
+                                Remove from list
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
 }

@@ -70,9 +70,20 @@ $(".popup[data-popup='search'] .popup-element > p").click(function () {
 
     $(".popup[data-popup='search'] .popup-element").removeClass("appear");
 
-    setTimeout(function(){
+    setTimeout(function () {
         $(".popup[data-popup='search']").fadeOut(500);
-    } , 2100)
-    
+    }, 2100)
+
     document.querySelector(".popup[data-popup='search'] > img").setAttribute("src", "");
 });
+
+// * List Button
+
+$("#Nav .favorites").click(function () {
+    $(`.popup[data-popup='list']`).fadeIn(500, function () {
+        $(".popup[data-popup='list'] .popup-element").addClass("appear");
+    });
+});
+
+// * List
+showMyList();

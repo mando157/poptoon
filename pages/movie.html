@@ -25,13 +25,12 @@
     <link rel="stylesheet" href="../css/all.min.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.keyframes.css">
-
-    <link rel="stylesheet" href="../css/plugins/swiper-bundle.min.css">
 
     <!-- ^ Animate & Wow ^ -->
     <link rel="stylesheet" href="../css/plugins/animate.min.css">
     <link rel="stylesheet" href="../css/plugins/animate.css">
+    
+    <link rel="stylesheet" href="../css/plugins/sweetaler.css">
 
     <link rel="stylesheet" href="../css/style.css">
 
@@ -66,21 +65,16 @@
         </div>
     </section>
 
-    <div class="popup" data-popup="reviews" onclick="closePopup()">
+    <div class="popup" data-popup="reviews" onclick="closePopup('reviews' , '1500')">
 
         <img src="">
 
         <div class="popup-element">
-            <i class="fa-solid fa-xmark" onclick="closePopup()"></i>
+            <i class="fa-solid fa-xmark" onclick="closePopup('reviews' , '1500')"></i>
 
             <h3>Movie Reviews</h3>
 
             <div class="content">
-                <!-- <div class="box">
-                    <h5 class="author"> ...</h5>
-                    <p class="review"></p>
-                    <span class="date">2021-03-01 | 17:10</span>
-                </div> -->
             </div>
         </div>
     </div>
@@ -90,30 +84,21 @@
     <!--?------ jQuery ------?-->
     <script src=" ../js/jquery.js"></script>
 
+    <!--?------ Sweet Alert js ------?-->
+    <script src="../js/plugins/sweetaler.js"></script>
+    
     <!--?------ Global Functions ------?-->
     <script src="../js/functions.js"></script>
-
-    <!--?------ Swiper Slider ------?-->
-    <script src="../js/plugins/swiper-bundle.min.js"></script>
 
     <!--?------ WOW.js Animations ------?-->
     <script src="../js/plugins/wow.min.js"></script>
 
 
-    <!--?------ GSAP Animation Library ------?-->
-    <script src="../js/plugins/gsap.min.js"></script>
-
-    <!--?------ GSAP Plugins ------?-->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
-
-    <!--?------ Custom GSAP Animations ------?-->
-    <script src="../js/gsap.js"></script>
-
-
     <!--?------ Main JavaScript ------?-->
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="./js/movie.js"></script>
+    
+
 </body>
 
 </html>

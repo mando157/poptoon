@@ -29,6 +29,8 @@
 
     <link rel="stylesheet" href="./css/plugins/swiper-bundle.min.css">
 
+    <link rel="stylesheet" href="../css/plugins/sweetaler.css">
+
     <!-- ^ Animate & Wow ^ -->
     <link rel="stylesheet" href="./css/plugins/animate.min.css">
     <link rel="stylesheet" href="./css/plugins/animate.css">
@@ -372,32 +374,35 @@
         </div>
     </div>
 
+    <!--* List Popup *-->
+    <div class="popup" data-popup="list" onclick="closePopup('list' , '500')">
+        <div class="popup-element">
+            <i class="fa-solid fa-xmark" onclick="closePopup('list' , '500')"></i>
+
+            <h3>Your List</h3>
+
+            <div class="content">
+                <p class="text-center" id="EmptyList"><span>Empty List</span> <i class="fa-solid fa-video-slash"></i></p>
+            </div>
+        </div>
+    </div>
+
     <!-- ! ________________ JS ________________ ! -->
 
     <!--?------ jQuery ------?-->
     <script src=" ./js/jquery.js"></script>
 
+    <!--?------ Sweet Alert js ------?-->
+    <script src="./js/plugins/sweetaler.js"></script>
+
     <!--?------ Global Functions ------?-->
     <script src="./js/functions.js"></script>
-
 
     <!--?------ Swiper Slider ------?-->
     <script src="./js/plugins/swiper-bundle.min.js"></script>
 
     <!--?------ WOW.js Animations ------?-->
     <script src="./js/plugins/wow.min.js"></script>
-
-
-    <!--?------ GSAP Animation Library ------?-->
-    <script src="./js/plugins/gsap.min.js"></script>
-
-    <!--?------ GSAP Plugins ------?-->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
-
-    <!--?------ Custom GSAP Animations ------?-->
-    <script src="./js/gsap.js"></script>
-
 
     <!--?------ Main JavaScript ------?-->
     <script src="./js/script.js"></script>

@@ -6,7 +6,7 @@
     overflow: hidden;
 
     nav {
-        @include position($p : fixed, $t : 0, $l : 0, $z : 999);
+        @include position($p : fixed, $t : 0, $l : 0, $z : 1000);
         @include size(100%);
         background: transparent;
         padding: 20px 0px;
@@ -102,7 +102,7 @@
     }
 
     .movie-details {
-        @include position($t : 50%, $l : 0, $z : 999);
+        @include position($t : 50%, $l : 0, $z : 900);
         @include size(100%, auto);
         transform: translateY(-50%);
 
@@ -118,7 +118,7 @@
                 }
 
                 @include responsive(650) {
-                    width: 230px;
+                    width: 200px;
                 }
 
                 @include responsive(1050) {
@@ -137,7 +137,7 @@
                 color: #fff;
 
                 h2 {
-                    font-size: clamp(30px, 6vw, 60px);
+                    font-size: clamp(25px, 6vw, 50px);
                     font-weight: 700;
                     letter-spacing: -2px;
 
@@ -187,6 +187,10 @@
                             @include flex($g : 2px);
 
                             @include responsive(350) {
+                                font-size: 10px;
+                            }
+
+                            @include responsive(450) {
                                 font-size: 12px;
                             }
 
@@ -221,6 +225,8 @@
 
                     @include responsive(350) {
                         font-size: 12px;
+                        max-height: 80px;
+                        overflow: auto;
                     }
 
                     @include responsive(650) {
@@ -229,6 +235,8 @@
 
                     @include responsive(1050) {
                         font-size: 16px;
+                        max-height: initial;
+                        overflow: visible;
                     }
                 }
 
@@ -238,11 +246,40 @@
 
                     * {
                         border: none;
+
+                        @include responsive(350) {
+                            font-size: 12px;
+                        }
+
+                        @include responsive(650) {
+                            font-size: 14px;
+                        }
+
+                        @include responsive(850) {
+                            font-size: 16px;
+                        }
                     }
 
                     button {
-                        background-color: rgba(255, 255, 255, 0.2);
-                        backdrop-filter: blur(10px);
+                        transition-duration: .5s;
+                        padding: 8px 16px;
+                        border: 1px solid transparent;
+                        border-radius: $border-r;
+                        font-weight: 500;
+                        color: #fff;
+
+                        &.add {
+                            background-color: rgba(255, 255, 255, 0.2);
+                            backdrop-filter: blur(10px);
+                        }
+
+                        &.remove {
+                            background-color: darkred;
+                        }
+
+                        &:hover {
+                            transform: translateY(-5px);
+                        }
                     }
                 }
 
@@ -253,13 +290,22 @@
 
 .popup[data-popup="reviews"] {
     display: none;
-    @include position($t : 0, $l : 0, $z : 1000);
+    overflow: hidden;
+    @include position($t : 0, $l : 0, $z : 1100);
     @include size(100%, 100%);
     background-color: rgba(0, 0, 0, .4);
 
     >img {
         @include position($b : 0, $l : 0);
         @include size(100%, auto);
+
+        @include responsive(350) {
+            display: none;
+        }
+
+        @include responsive(1050) {
+            display: block;
+        }
 
     }
 
@@ -278,11 +324,24 @@
         @include responsive(350) {
             @include size(80%, 100%);
             max-width: 450px;
+            transition-duration: 1s;
+        }
+
+        @include responsive(1050) {
+            transition-duration: 1.5s;
         }
 
         &.appear {
             transition-delay: 2.2s;
             transform: translateX(0%);
+
+            @include responsive(350) {
+                transition-delay: .3s;
+            }
+
+            @include responsive(1050) {
+                transition-delay: 2.2s;
+            }
         }
 
         >i {
@@ -331,9 +390,12 @@
 
                 @include responsive(350) {
                     clip-path: none;
+                    border-radius: 10px;
                 }
 
                 @include responsive(650) {
+                    border-radius: 0px;
+
                     clip-path: polygon(2% 0,
                             48% 0,
                             50% 2%,
