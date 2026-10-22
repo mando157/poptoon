@@ -1,8 +1,8 @@
 @use "../abstracts/" as *;
 
 #Categories {
-    .title{
-        .search{
+    .title {
+        .search {
             width: 50px;
             margin-left: auto;
             cursor: pointer;
@@ -147,7 +147,7 @@
             .tab-pane {
                 .content {
                     @include flex($js : start, $g : 20px);
-                    flex-wrap:wrap;
+                    flex-wrap: wrap;
                     padding: 20px 0px;
                     row-gap: 25px;
                     width: 100%;
@@ -157,6 +157,9 @@
                         position: relative;
                         overflow: hidden;
                         border-radius: $border-r;
+                        transition-duration: 0.5s;
+                        opacity: 0;
+                        transform: scale(.8);
 
                         @include responsive(350) {
                             flex-basis: 280px;
@@ -271,6 +274,15 @@
                                 opacity: 1;
                                 transition: transform .3s, opacity .5s 1s;
                             }
+                        }
+                    }
+                }
+
+                &.show {
+                    .content {
+                        .box {
+                            transform: scale(1);
+                            opacity: 1;
                         }
                     }
                 }

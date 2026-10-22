@@ -87,3 +87,27 @@ $("#Nav .favorites").click(function () {
 
 // * List
 showMyList();
+
+// * Loading Page 
+window.addEventListener("DOMContentLoaded", function () {
+    const loading  = document.querySelector(".loading");
+    if (!loading) return;
+
+    const left     = loading.querySelector(".cl");
+    const right    = loading.querySelector(".cr");
+    const DURATION = 3500;
+    const EASE     = "cubic-bezier(.65, 0, .35, 1)";
+
+    left.style.animation  = "openL " + DURATION + "ms " + EASE + " forwards";
+    right.style.animation = "openR " + DURATION + "ms " + EASE + " forwards";
+
+    setTimeout(function () {
+        loading.style.transition = "opacity .5s ease";
+        loading.style.opacity = "0";
+    }, DURATION);
+
+    setTimeout(function () {
+        loading.style.display = "none";
+        document.documentElement.style.overflow = "";
+    }, DURATION + 500);
+});

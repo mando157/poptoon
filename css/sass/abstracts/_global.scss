@@ -223,3 +223,53 @@ section {
         }
     }
 }
+
+.loading {
+    @include position($p : fixed, $z : 1100);
+    @include size(100%, 100svh);
+
+    .cl {
+        transform-origin: 0 0;
+        
+    }
+
+    .cr {
+        transform-origin: 1200px 0;
+        
+    }
+
+    @keyframes openL {
+
+        0%,
+        12% {
+            transform: scaleX(1);
+        }
+
+        88%,
+        100% {
+            transform: scaleX(.14);
+        }
+    }
+
+    @keyframes openR {
+
+        0%,
+        12% {
+            transform: scaleX(1);
+        }
+
+        88%,
+        100% {
+            transform: scaleX(.14);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .cl,
+        .cr {
+            animation: none;
+        }
+    }
+
+}
