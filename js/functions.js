@@ -4,7 +4,67 @@ let allMoviesData = [],
     pages = [],
     currentPage = 1,
 
-    listContainer = [];
+    listContainer = [],
+    isDark = "false"
+    body = document.querySelector("body");
+
+
+// * Localstorage
+
+if (localStorage.getItem('listContainer') == null) {
+    localStorage.setItem('listContainer', JSON.stringify([]));
+} else {
+    listContainer = JSON.parse(localStorage.getItem('listContainer'));
+}
+if (localStorage.getItem('isDark') == null) {
+    localStorage.setItem('isDark', "false");
+} else {
+    isDark = localStorage.getItem('isDark');
+}
+
+body.setAttribute(
+    "data-theme",
+    ((isDark == "true") ? "dark" : "light")
+);
+
+function updateLocalStorage() {
+    localStorage.setItem('isDark', isDark);
+    localStorage.setItem('listContainer', JSON.stringify(listContainer));
+}
+
+// * Mood
+$(".nav-toggle").on("click", function () {
+    $(".nav-links ul").toggleClass("open");
+});
+
+$("section , header").click(function () {
+    $(".nav-links ul").removeClass("open");
+});
+
+$(".mood").on("click", function () {
+
+    if (body.getAttribute("data-theme") === "light") {
+        $(".mood i").addClass("fa-sun").removeClass("fa-moon");
+        $(".logo img").attr("src", "./images/dark_logo.png");
+        $("#Categories .title .search").attr("src", "./images/light_search.gif");
+        
+        isDark = "true";
+    } else {
+        $(".mood i").addClass("fa-moon").removeClass("fa-sun");
+        $(".logo img").attr("src", "./images/light_logo.png");
+        $("#Categories .title .search").attr("src", "./images/dark_search.gif");
+
+        isDark = "false";
+    }
+
+    body.setAttribute(
+        "data-theme",
+        isDark === "true" ? "dark" : "light"
+    );
+
+    updateLocalStorage();
+});
+
 
 // * Get Movies
 async function getMovies() {
@@ -85,37 +145,6 @@ function carousalItemButtonComponent(movie, index) {
         `
     }
 }
-
-// * Mood
-$(".nav-toggle").on("click", function () {
-    $(".nav-links ul").toggleClass("open");
-});
-
-$("section , header").click(function () {
-    $(".nav-links ul").removeClass("open");
-});
-
-$(".mood").on("click", function () {
-    const body = document.querySelector("body");
-
-    body.setAttribute(
-        "data-theme",
-        body.getAttribute("data-theme") === "light" ? "dark" : "light"
-    );
-
-    if (body.getAttribute("data-theme") === "light") {
-        $(".mood i").addClass("fa-sun");
-        $(".mood i").removeClass("fa-moon");
-        $(".logo img").attr("src", "./images/light_logo.png");
-        $("#Categories .title .search").attr("src", "./images/light_search.gif");
-    } else {
-        $(".mood i").addClass("fa-moon");
-        $(".mood i").removeClass("fa-sun");
-        $(".logo img").attr("src", "./images/dark_logo.png");
-        $("#Categories .title .search").attr("src", "./images/dark_search.gif");
-    }
-});
-
 
 // * Top Rated Section
 
@@ -383,17 +412,6 @@ $(".popup-element").click(function (e) {
 });
 
 // * Add to List & Remove From List
-
-if (localStorage.getItem('listContainer') == null) {
-    localStorage.setItem('listContainer', JSON.stringify([]));
-} else {
-    listContainer = JSON.parse(localStorage.getItem('listContainer'));
-}
-
-function updateLocalStorage() {
-    localStorage.setItem('listContainer', JSON.stringify(listContainer));
-}
-
 function removeToList(movieId, that) {
     let indexOfMovie = listContainer.findIndex(
         (movie) => movie.id == movieId
@@ -407,7 +425,7 @@ function removeToList(movieId, that) {
     if (listContainer.length == 0) {
         $("[data-popup='list'] #EmptyList").removeClass("d-none");
     }
-    
+
     updateLocalStorage();
 }
 

@@ -111,3 +111,9 @@ window.addEventListener("DOMContentLoaded", function () {
         document.documentElement.style.overflow = "";
     }, DURATION + 500);
 });
+
+$("#Nav .account , footer .sign").click(function () {
+    $(`.popup[data-popup='sign']`).fadeIn(500, function () {
+        $(".popup[data-popup='sign'] .popup-element").addClass("appear");
+    });
+});

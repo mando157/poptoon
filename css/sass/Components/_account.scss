@@ -1,0 +1,61 @@
+@use "../abstracts/" as *;
+
+.popup[data-popup='sign'] {
+    display: none;
+    @include position($p : fixed, $t : 0, $l : 0, $z : 1100);
+    @include size(100%, 100svh);
+    background-color: var(--nav-back);
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
+    padding: 20px 0px;
+
+    .popup-element {
+        @include position($t : 50%, $l : 50%);
+        transform: translate(-50%, -60%);
+
+        position: relative;
+        background-color: #fff;
+
+        min-width: 280px;
+        max-width: 400px;
+        padding: 11px 20px;
+        margin: 0px 20px;
+        border-radius: 10px;
+        transition-duration: .5s;
+        opacity: 0;
+
+        &.appear {
+            transform: translateY(0px);
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+
+        >i {
+            @include position($t : 10px, $r : 10px);
+            cursor: pointer;
+        }
+
+        form {
+            input {
+                &:focus-visible {
+                    box-shadow: none;
+                    border-color: var(--primary-color);
+                    outline: none;
+                }
+            }
+        }
+
+        .create-account {
+            p {
+                font-size: 14px;
+
+                span {
+                    color: var(--primary-color);
+                    font-weight: 600;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+}
