@@ -17,7 +17,7 @@
             .logo {
                 @include flex($g : 10px);
 
-                a {
+                a.arrow {
                     position: relative;
                     overflow: hidden;
                     padding: 5px 10px;

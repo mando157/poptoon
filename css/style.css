@@ -1389,13 +1389,13 @@ footer .container .footer p .poptoon {
   flex-direction: row;
   gap: 10px;
 }
-#Movie nav .container .logo a {
+#Movie nav .container .logo a.arrow {
   position: relative;
   overflow: hidden;
   padding: 5px 10px;
   border-radius: 10px;
 }
-#Movie nav .container .logo a::before {
+#Movie nav .container .logo a.arrow::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -1409,15 +1409,15 @@ footer .container .footer p .poptoon {
   background-color: var(--primary-color);
   transition-duration: 0.5s;
 }
-#Movie nav .container .logo a i {
+#Movie nav .container .logo a.arrow i {
   position: relative;
   transition-duration: 0.5s;
 }
-#Movie nav .container .logo a:hover::before {
+#Movie nav .container .logo a.arrow:hover::before {
   width: 100%;
   height: 100%;
 }
-#Movie nav .container .logo a:hover i {
+#Movie nav .container .logo a.arrow:hover i {
   color: #000;
 }
 #Movie nav .container p {
