@@ -402,6 +402,7 @@ function closePopup(popupName, duration) {
     $(`.popup[data-popup='${popupName}'] .popup-element`).removeClass("appear");
     setTimeout(function () {
         $(`.popup[data-popup='${popupName}']`).fadeOut(500);
+        $(`.popup[data-popup='sign']`).removeClass("d-flex");
     }, Number(duration));
 
     $(" .popup[data-popup='reviews'] > img").attr("src", "");

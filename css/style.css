@@ -2267,29 +2267,22 @@ footer .container .footer p .poptoon {
   background-color: var(--nav-back);
   -webkit-backdrop-filter: blur(25px);
   backdrop-filter: blur(25px);
-  padding: 20px 0px;
+  justify-content: center;
+  align-items: center;
 }
 .popup[data-popup=sign] .popup-element {
-  position: absolute;
-  top: 50%;
-  right: initial;
-  bottom: initial;
-  left: 50%;
-  z-index: initial;
-  transform: translate(-50%, -60%);
+  transform: translateY(-10px);
   position: relative;
   background-color: #fff;
-  min-width: 280px;
+  min-width: 250px;
   max-width: 400px;
   padding: 11px 20px;
-  margin: 0px 20px;
   border-radius: 10px;
   transition-duration: 0.5s;
   opacity: 0;
 }
 .popup[data-popup=sign] .popup-element.appear {
   transform: translateY(0px);
-  transform: translate(-50%, -50%);
   opacity: 1;
 }
 .popup[data-popup=sign] .popup-element > i {

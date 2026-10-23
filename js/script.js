@@ -114,6 +114,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 $("#Nav .account , footer .sign").click(function () {
     $(`.popup[data-popup='sign']`).fadeIn(500, function () {
+        $(`.popup[data-popup='sign']`).addClass("d-flex");
         $(".popup[data-popup='sign'] .popup-element").addClass("appear");
     });
 });
