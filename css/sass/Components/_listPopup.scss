@@ -67,6 +67,10 @@
                 backdrop-filter: blur(25px);
                 -webkit-backdrop-filter: blur(25px);
 
+                .image{
+                    max-width: 200px;
+                }
+
                 .details {
                     @include flex($direction : column , $js : space-between);
 

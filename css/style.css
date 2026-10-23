@@ -2221,6 +2221,9 @@ footer .container .footer p .poptoon {
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
 }
+.popup[data-popup=list] .popup-element .content .box .image {
+  max-width: 200px;
+}
 .popup[data-popup=list] .popup-element .content .box .details {
   display: flex;
   justify-content: space-between;

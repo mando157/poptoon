@@ -469,23 +469,23 @@ function showMyList() {
 
 function listCardComponent(movie) {
     return `
-        <div class="box">
-            <div class="row w-100">
-                <div class="image col-3 p-0">
+        <div class="box p-3 d-flex justify-content-center align-items-center">
+            <div class="row w-100 flex-column flex-sm-row">
+                <div class="image col-12 col-sm-3 rounded-2">
                     <img src="https://image.tmdb.org/t/p/original${movie.images.posters[0].file_path}"
-                        class="img-fluid" alt="poster">
+                        class="w-100 rounded-2" alt="poster">
                 </div>
-                <div class="details col-9 py-4">
+                <div class="details col-12 col-sm-9">
                     <div class="text">
                         <h5>${movie.title}</h5>
                         <span class="tagline">${movie.tagline}</span>
                     </div>
 
                     <div class="buttons">
-                        <a href="./pages/movie.html?id=${movie.id}"><span>movie</span> <i
+                        <a href="./pages/movie.html?id=${movie.id}" class="mb-2"><span>movie</span> <i
                                 class="fa-brands fa-empire fa-spin"></i></a>
 
-                        <button class="remove" onclick="removeToList(${movie.id} , this)">
+                        <button class="remove mt-2" onclick="removeToList(${movie.id} , this)">
                             <span>
                                 <i class="fa-solid fa-trash"></i>
                                 Remove from list
