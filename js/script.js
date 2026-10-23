@@ -79,7 +79,7 @@ $(".popup[data-popup='search'] .popup-element > p").click(function () {
 
 // * List Button
 
-$("#Nav .favorites").click(function () {
+$("#Nav .favorites , footer .favorites").click(function () {
     $(`.popup[data-popup='list']`).fadeIn(500, function () {
         $(".popup[data-popup='list'] .popup-element").addClass("appear");
     });
