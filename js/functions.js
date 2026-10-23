@@ -469,8 +469,8 @@ function showMyList() {
 
 function listCardComponent(movie) {
     return `
-        <div class="box p-3 d-flex justify-content-center align-items-center">
-            <div class="row w-100 flex-column flex-sm-row">
+        <div class="box d-flex justify-content-center align-items-center">
+            <div class="row w-100 flex-column flex-sm-row p-3">
                 <div class="image col-12 col-sm-3 rounded-2">
                     <img src="https://image.tmdb.org/t/p/original${movie.images.posters[0].file_path}"
                         class="w-100 rounded-2" alt="poster">
