@@ -90,15 +90,15 @@ showMyList();
 
 // * Loading Page 
 window.addEventListener("DOMContentLoaded", function () {
-    const loading  = document.querySelector(".loading");
+    const loading = document.querySelector(".loading");
     if (!loading) return;
 
-    const left     = loading.querySelector(".cl");
-    const right    = loading.querySelector(".cr");
+    const left = loading.querySelector(".cl");
+    const right = loading.querySelector(".cr");
     const DURATION = 3500;
-    const EASE     = "cubic-bezier(.65, 0, .35, 1)";
+    const EASE = "cubic-bezier(.65, 0, .35, 1)";
 
-    left.style.animation  = "openL " + DURATION + "ms " + EASE + " forwards";
+    left.style.animation = "openL " + DURATION + "ms " + EASE + " forwards";
     right.style.animation = "openR " + DURATION + "ms " + EASE + " forwards";
 
     setTimeout(function () {
@@ -118,3 +118,64 @@ $("#Nav .account , footer .sign").click(function () {
         $(".popup[data-popup='sign'] .popup-element").addClass("appear");
     });
 });
+
+// * Mouse
+
+// window.addEventListener("mousemove", function (e) {
+//     let mouseWidth = $(".mouse").outerWidth(),
+//         mouseHeight = $(".mouse").outerHeight();
+
+//     $(".mouse").css({
+//         left: e.clientX - mouseWidth / 2,
+//         top: e.clientY - mouseHeight / 2
+//     });
+
+// });
+
+// $("a , button , li , span , i").on("mousemove", function(){
+//     $(".mouse").addClass("focus");
+// });
+
+// $("a , button , li , span , i").on("mouseleave", function(){
+//     $(".mouse").removeClass("focus");
+// });
+
+const cursor = document.querySelector(".mouse");
+const follower = document.querySelector(".mouse-follower");
+
+let mouseX = 0;
+let mouseY = 0;
+
+let followerX = 0;
+let followerY = 0;
+
+window.addEventListener("mousemove", function (e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    cursor.style.left = `${mouseX}px`;
+    cursor.style.top = `${mouseY}px`;
+});
+
+function animateCursor() {
+    followerX += (mouseX - followerX) * 0.15;
+    followerY += (mouseY - followerY) * 0.15;
+
+    follower.style.left = `${followerX}px`;
+    follower.style.top = `${followerY}px`;
+
+    requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+document.querySelectorAll("a, button, [data-cursor='hover']")
+    .forEach(element => {
+        element.addEventListener("mouseenter", () => {
+            follower.classList.add("focus");
+        });
+
+        element.addEventListener("mouseleave", () => {
+            follower.classList.remove("focus");
+        });
+    });

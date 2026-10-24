@@ -224,56 +224,6 @@ section {
     }
 }
 
-// .loading {
-//     @include position($p : fixed, $z : 1100);
-//     @include size(100%, 100svh);
-
-//     .cl {
-//         transform-origin: 0 0;
-
-//     }
-
-//     .cr {
-//         transform-origin: 1200px 0;
-
-//     }
-
-//     @keyframes openL {
-
-//         0%,
-//         12% {
-//             transform: scaleX(1);
-//         }
-
-//         88%,
-//         100% {
-//             transform: scaleX(.14);
-//         }
-//     }
-
-//     @keyframes openR {
-
-//         0%,
-//         12% {
-//             transform: scaleX(1);
-//         }
-
-//         88%,
-//         100% {
-//             transform: scaleX(.14);
-//         }
-//     }
-
-//     @media (prefers-reduced-motion: reduce) {
-
-//         .cl,
-//         .cr {
-//             animation: none;
-//         }
-//     }
-
-// }
-
 .demo {
     min-height: 100svh;
     display: grid;
@@ -344,8 +294,42 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     .loading .cl,
     .loading .cr {
         animation-duration: .01s !important;
+    }
+}
+
+
+.mouse,
+.mouse-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+.mouse {
+    @include size(6px, 6px);
+    background-color: var(--primary-color);
+}
+
+.mouse-follower {
+    @include size(35px, 35px);
+    border: 1px solid var(--primary-color);
+    transition:
+        width .3s ease,
+        height .3s ease,
+        background-color .3s ease,
+        opacity .3s ease;
+
+    &.focus {
+        @include size(55px, 55px);
+        background-color: rgba(255, 255, 255, .08);
+        border-color: var(--primary-color);
     }
 }

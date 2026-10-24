@@ -314,6 +314,36 @@ section {
     animation-duration: 0.01s !important;
   }
 }
+.mouse,
+.mouse-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.mouse {
+  width: 6px;
+  height: 6px;
+  background-color: var(--primary-color);
+}
+
+.mouse-follower {
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--primary-color);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+}
+.mouse-follower.focus {
+  width: 55px;
+  height: 55px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--primary-color);
+}
+
 #Nav {
   position: fixed;
   top: 10px;
