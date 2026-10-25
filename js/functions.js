@@ -6,7 +6,7 @@ let allMoviesData = [],
 
     listContainer = [],
     isDark = "false"
-    body = document.querySelector("body");
+body = document.querySelector("body");
 
 
 // * Localstorage
@@ -47,7 +47,7 @@ $(".mood").on("click", function () {
         $(".mood i").addClass("fa-sun").removeClass("fa-moon");
         $(".logo img").attr("src", "./images/dark_logo.png");
         $("#Categories .title .search").attr("src", "./images/light_search.gif");
-        
+
         isDark = "true";
     } else {
         $(".mood i").addClass("fa-moon").removeClass("fa-sun");
@@ -496,4 +496,46 @@ function listCardComponent(movie) {
             </div>
         </div>
     `
+}
+
+function mouse() {
+    const cursor = document.querySelector(".mouse");
+    const follower = document.querySelector(".mouse-follower");
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let followerX = 0;
+    let followerY = 0;
+
+    window.addEventListener("mousemove", function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        cursor.style.left = `${mouseX}px`;
+        cursor.style.top = `${mouseY}px`;
+    });
+
+    function animateCursor() {
+        followerX += (mouseX - followerX) * 0.15;
+        followerY += (mouseY - followerY) * 0.15;
+
+        follower.style.left = `${followerX}px`;
+        follower.style.top = `${followerY}px`;
+
+        requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+
+    document.querySelectorAll("a, button, [data-cursor='hover']")
+        .forEach(element => {
+            element.addEventListener("mouseenter", () => {
+                follower.classList.add("focus");
+            });
+
+            element.addEventListener("mouseleave", () => {
+                follower.classList.remove("focus");
+            });
+        });
 }

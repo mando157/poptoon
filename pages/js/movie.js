@@ -228,3 +228,6 @@ window.addEventListener("DOMContentLoaded", function () {
         document.documentElement.style.overflow = "";
     }, DURATION + 500);
 });
+
+// * Mouse
+mouse();
