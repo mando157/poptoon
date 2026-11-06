@@ -64,6 +64,17 @@
 
 <body data-theme="light">
 
+    <div class="timeline">
+        <div class="progress">
+            <img src="./images/popcorn-transparent.svg" alt="popcorn">
+        </div>
+
+        <span data-name="Home"></span>
+        <span data-name="Top"></span>
+        <span data-name="Latest"></span>
+        <span data-name="Categories"></span>
+    </div>
+
     <div class="mouse d-none d-lg-block"></div>
     <div class="mouse-follower d-none d-lg-block"></div>
 
@@ -182,7 +193,7 @@
     <!--* Top Section *-->
     <section id="Top" class="section">
         <div class="container">
-            <div class="title">
+            <div class="title wow animate__fadeInLeft">
                 <img src="./images/clapperboard.svg" width="48" height="48" alt="clapperboard">
                 <h2>Top Rated</h2>
             </div>
@@ -205,7 +216,7 @@
     <!--* Latest Section *-->
     <section id="Latest" class="section">
         <div class="container">
-            <div class="title">
+            <div class="title wow animate__fadeInLeft">
                 <img src="./images/popcorn-transparent.svg" width="48" height="48" alt="clapperboard">
                 <h2>Latest Movies</h2>
             </div>
@@ -224,13 +235,26 @@
         </div>
     </section>
 
+    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24">
+        <g fill="none" stroke="#000" stroke-width="2">
+            <circle cx="12" cy="12" r="2">
+                <animate attributeName="r" values="2;10" dur="1.5s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="1;0" dur="1.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="12" cy="12" r="2">
+                <animate attributeName="r" values="2;10" dur="1.5s" begin="0.75s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="1;0" dur="1.5s" begin="0.75s" repeatCount="indefinite" />
+            </circle>
+        </g>
+    </svg> -->
+
     <img src="./images/film-divider-light.svg" height="20px" width="100%" alt="film-divider">
 
     <!--* Categories Section *-->
     <section id="Categories" class="section">
         <div class="container">
 
-            <div class="title align-items-end">
+            <div class="title wow animate__fadeInLeft">
                 <img src="./images/popcorn.svg" height="80" alt="clapperboard">
                 <h2>Categories</h2>
                 <img src="./images/light_search.gif" class="search" data-bs-toggle="tooltip" data-bs-placement="top"

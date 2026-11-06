@@ -5,8 +5,9 @@ let allMoviesData = [],
     currentPage = 1,
 
     listContainer = [],
-    isDark = "false"
-body = document.querySelector("body");
+    isDark = "false",
+
+    body = document.querySelector("body");
 
 
 // * Localstorage
@@ -558,4 +559,54 @@ function mouse() {
                 follower.classList.remove("focus");
             });
         });
+}
+
+
+
+// * Timeline
+let timeLine = document.querySelector(".timeline"),
+    progress = timeLine.querySelector(".progress"),
+    indicators = timeLine.querySelectorAll("span"),
+    sections = document.querySelectorAll(".section");
+
+function setPositions() {
+    let docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    indicators.forEach(function (indicator) {
+        sections.forEach(function (section) {
+            if (section.getAttribute("id") == indicator.dataset.name) {
+                let topOfSection = section.getBoundingClientRect().top + window.scrollY - nav.clientHeight;
+
+                let ratio = Math.min(Math.max(topOfSection / docHeight, 0), 1);
+
+                indicator.style.top = (ratio * timeLine.clientHeight + "px");
+                indicator.dataset.ratio = ratio;
+
+            }
+        });
+
+        indicators.forEach(function (indicator) {
+            indicator.addEventListener("click", function () {
+                let targetSection = document.querySelector("#" + indicator.dataset.name);
+                if (!targetSection) return;
+                let targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - nav.clientHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth"
+                });
+            });
+        });
+
+    });
+
+}
+
+function updateActive() {
+    let docHeight = document.documentElement.scrollHeight - window.innerHeight,
+        scrollPercent = (window.scrollY / docHeight) * 100;
+
+    indicators.forEach(function (indicator) {
+        indicator.classList.toggle("active", scrollPercent + 0.5 >= indicator.dataset.ratio * 100);
+    });
 }

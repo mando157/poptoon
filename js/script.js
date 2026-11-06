@@ -1,5 +1,6 @@
 let nav = document.querySelector("#Nav"),
     navLinks = document.querySelectorAll("#Nav .nav-links ul a");
+
 getMovies();
 
 // * Swiper JS
@@ -121,3 +122,26 @@ $("#Nav .account , footer .sign").click(function () {
 
 // * Mouse
 mouse();
+
+// * Wow.js
+wow = new WOW(
+    {
+        animateClass: 'animate__animated',
+    }
+)
+wow.init();
+
+// * Scroll TimeLine
+window.addEventListener("scroll", function () {
+    let scrollTop = window.scrollY,
+        docHeight = document.documentElement.scrollHeight - window.innerHeight,
+        scrollPercent = (scrollTop / docHeight) * 100;
+
+    progress.style.height = scrollPercent + "%";
+
+    updateActive();
+});
+
+setPositions();
+window.addEventListener("load", setPositions);
+window.addEventListener("resize", setPositions);
