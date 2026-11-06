@@ -215,7 +215,27 @@ function changeMovieDetails(that) {
 }
 function LatestDetailsComponent(movie) {
     return `
-        <img src="https://image.tmdb.org/t/p/original${movie.images.backdrops[1].file_path}" alt="movieBackDrop">
+        <div class="image">
+            <div class="overlay">
+                <svg xmlns="http://www.w3.org/2000/svg" width="45px" height="45px" viewBox="0 0 24 24">
+                    <g fill="#fff">
+                        <circle cx="5" cy="12" r="2">
+                            <animate attributeName="cy" values="12;6;12;12" keyTimes="0;0.25;0.5;1" dur="1s"
+                                repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="12" cy="12" r="2">
+                            <animate attributeName="cy" values="12;6;12;12" keyTimes="0;0.25;0.5;1" dur="1s" begin="0.15s"
+                                repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="19" cy="12" r="2">
+                            <animate attributeName="cy" values="12;6;12;12" keyTimes="0;0.25;0.5;1" dur="1s" begin="0.3s"
+                                repeatCount="indefinite" />
+                        </circle>
+                    </g>
+                </svg>
+            </div>
+            <img src="https://image.tmdb.org/t/p/original${movie.images.backdrops[1].file_path}" alt="movieBackDrop">
+        </div>
 
         <div class="text">
             <h3 class="name">${movie.title}</h3>
@@ -488,7 +508,7 @@ function listCardComponent(movie) {
                         <button class="remove mt-2" onclick="removeToList(${movie.id} , this)">
                             <span>
                                 <i class="fa-solid fa-trash"></i>
-                                Remove from list
+                                Remove from  list
                             </span>
                         </button>
                     </div>
@@ -528,7 +548,7 @@ function mouse() {
 
     animateCursor();
 
-    document.querySelectorAll("a, button, [data-cursor='hover']")
+    document.querySelectorAll("a, .movie-button , button, [data-cursor='hover']")
         .forEach(element => {
             element.addEventListener("mouseenter", () => {
                 follower.classList.add("focus");

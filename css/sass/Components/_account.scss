@@ -30,7 +30,7 @@
 
         >i {
             @include position($t : 10px, $r : 10px);
-            cursor: pointer;
+            cursor: none;
         }
 
         form {
@@ -50,7 +50,7 @@
                 span {
                     color: var(--primary-color);
                     font-weight: 600;
-                    cursor: pointer;
+                    cursor: none;
                 }
             }
         }

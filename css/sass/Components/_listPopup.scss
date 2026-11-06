@@ -2,7 +2,7 @@
 
 .popup[data-popup="list"] {
     display: none;
-    @include position($p : fixed , $t : 0, $l : 0, $z : 1000);
+    @include position($p : fixed, $t : 0, $l : 0, $z : 1000);
     @include size(100%, 100%);
     background-color: rgba(0, 0, 0, .4);
 
@@ -28,7 +28,7 @@
 
         >i {
             @include position($t : 20px, $r : 20px);
-            cursor: pointer;
+            cursor: none;
         }
 
         h3 {
@@ -53,7 +53,7 @@
                 background-color: teal;
                 color: #fff;
                 font-weight: 600;
-                font-size: clamp(10px , 6vw , 20px);
+                font-size: clamp(10px, 6vw, 20px);
                 border-radius: 10px;
             }
 
@@ -67,37 +67,38 @@
                 backdrop-filter: blur(25px);
                 -webkit-backdrop-filter: blur(25px);
 
-                .image{
+                .image {
                     max-width: 200px;
                 }
 
                 .details {
-                    @include flex($direction : column , $js : space-between);
+                    @include flex($direction : column, $js : space-between);
 
-                    .text{
+                    .text {
                         width: 100%;
 
                         h5 {
                             margin: 0;
                             font-size: 26px;
                         }
-    
-                        .tagline{
+
+                        .tagline {
                             display: block;
                             color: #000;
                             margin: 10px 0px;
                         }
                     }
 
-                    .buttons{
-                        a{
+                    .buttons {
+                        a {
                             background-color: var(--primary-color);
                             padding: 5px 10px;
                             font-size: 18px;
                             margin-right: 10px;
                             border-radius: 5px;
                         }
-                        button{
+
+                        button {
                             border-radius: 5px;
                             padding: 5px 10px;
                             border: none;

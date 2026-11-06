@@ -40,7 +40,7 @@
             @include flex($g : 5px);
             width: fit-content;
             margin: 20px 20px 20px auto;
-            cursor: pointer;
+            cursor: none;
         }
 
         &::-webkit-scrollbar {
@@ -97,7 +97,7 @@
 
                 >img {
                     @include position($t :50%, $l :50%);
-                    transform: translate(-50% , -50%);
+                    transform: translate(-50%, -50%);
                     @include size(120px);
                 }
 

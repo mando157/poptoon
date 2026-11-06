@@ -1,7 +1,6 @@
 @use "../abstracts/" as *;
 
 #Latest {
-    min-height: 100svh;
 
     .content {
         .part-1 {
@@ -37,6 +36,7 @@
                     @include size(100%, auto);
 
                     button {
+                        position: relative;
                         @include size(100%, 75px);
                         @include flex($js : start, $g : 15px);
                         background-color: transparent;
@@ -45,6 +45,25 @@
                         border: 1px solid var(--primary-light);
                         border-left: 8px solid var(--primary-light);
                         box-shadow: var(--box-shadow);
+                        cursor: none;
+                        overflow: hidden;
+
+                        &::before {
+                            content: "";
+                            @include position($t : 0px, $l : 0px);
+                            @include size(100%, 100%);
+                            background-color: var(--primary-light);
+                            inset: 0;
+                            transform: scaleX(0);
+                            transform-origin: right;
+
+                            transition: transform .5s cubic-bezier(0.65, 0, 0.35, 1);
+                        }
+
+                        * {
+                            position: relative;
+                            z-index: 1;
+                        }
 
                         img {
                             display: block;
@@ -60,6 +79,20 @@
                             font-weight: 600;
 
                             text-shadow: var(--text-shadow);
+
+                            transition: all .5s ease-in-out;
+
+                        }
+
+                        &:hover {
+                            &::before {
+                                transform: scaleX(1);
+                                transform-origin: left;
+                            }
+
+                            span {
+                                color: var(--dark-color);
+                            }
                         }
                     }
                 }
@@ -67,7 +100,7 @@
             }
 
             >i {
-                @include position($b : 5%, $r : -10px);
+                @include position($t : 50%, $r : -15px);
                 color: var(--primary-light);
                 font-size: 20px;
             }
@@ -77,11 +110,60 @@
             padding: 20px 0px 0px 20px;
             position: relative;
 
-            img {
+            .image {
                 position: relative;
-                display: block;
-                @include size(100%);
+                @include size(100%, 310px);
+                overflow: hidden;
                 border-radius: $border-r;
+
+                max-height: 310px;
+                min-height: 150px;
+
+                @include responsive(350) {
+                    @include size(100%, 150px);
+                }
+
+                @include responsive(350) {
+                    @include size(100%, 150px);
+                }
+
+                @include responsive(450) {
+                    @include size(100%, 200px);
+                }
+
+                @include responsive(650) {
+                    @include size(100%, 240px);
+                }
+
+                @include responsive(850) {
+                    @include size(100%, 190px);
+                }
+
+                @include responsive(1050) {
+                    @include size(100%, 260px);
+                }
+
+                @include responsive(1250) {
+                    @include size(100%, 310px);
+                }
+
+                .overlay {
+                    content: "";
+                    @include position($p : absolute, $t : 0px, $l : 0px);
+                    @include size(100%, 100%);
+                    @include flex();
+                    background:rgba(0, 0, 0, 0.5);
+                    backdrop-filter: blur(5px);
+
+                }
+
+                img {
+                    position: relative;
+                    display: block;
+                    @include size(100% , 100%);
+                    border-radius: $border-r;
+                    transition: all .5s ease-in-out;
+                }
             }
 
             .text {

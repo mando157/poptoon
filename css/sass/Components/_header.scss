@@ -16,7 +16,7 @@
                     @include size(100px);
                     overflow: hidden;
                     border-radius: $border-r;
-                    cursor: pointer;
+                    cursor: none;
                     border: 1px solid var(--accent-color, #D9FF66);
                     border-color: color-mix(in srgb, var(--accent-color, #D9FF66) 30%, transparent);
 

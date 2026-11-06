@@ -315,7 +315,7 @@
 .swiper-button-prev {
     align-items: center;
     color: var(--swiper-navigation-color, var(--swiper-theme-color));
-    cursor: pointer;
+    cursor: none;
     display: flex;
     height: var(--swiper-navigation-size);
     justify-content: center;

@@ -7,6 +7,8 @@ body {
     transition: background 0.3s ease-in-out, color 0.3s ease;
     background: var(--surface);
 
+    cursor: none;
+
     ::selection {
         background-color: rgb(43, 181, 168, 0.8);
         backdrop-filter: blur(10px);
@@ -32,9 +34,15 @@ h6 {
 a {
     text-decoration: none;
     color: #fff;
+    cursor: none;
+}
+
+i{
+    cursor: none;
 }
 
 li {
+    cursor: none;
     list-style: none;
 }
 
