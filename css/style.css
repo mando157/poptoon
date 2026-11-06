@@ -328,7 +328,7 @@ section {
   left: 0;
   pointer-events: none;
   border-radius: 50%;
-  z-index: 9999;
+  z-index: 999999;
   transform: translate(-50%, -50%);
 }
 
@@ -357,7 +357,7 @@ section {
   right: initial;
   bottom: initial;
   left: 50px;
-  z-index: 10000;
+  z-index: 1000;
   display: block;
   width: 5px;
   height: 90svh;

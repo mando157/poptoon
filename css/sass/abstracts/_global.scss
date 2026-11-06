@@ -317,7 +317,7 @@ section {
     left: 0;
     pointer-events: none;
     border-radius: 50%;
-    z-index: 9999;
+    z-index: 999999;
     transform: translate(-50%, -50%);
 }
 
@@ -343,7 +343,7 @@ section {
 }
 
 .timeline {
-    @include position($p : fixed, $t : 50%, $l : 50px, $z : 10000);
+    @include position($p : fixed, $t : 50%, $l : 50px, $z : 1000);
     display: block;
     @include size(5px, 90svh);
     transform: translateY(-50%);
