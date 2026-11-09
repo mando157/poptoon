@@ -70,6 +70,8 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--primary-color) var(--dark-color);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 h1,
@@ -100,28 +102,77 @@ section {
   padding: 50px 0;
 }
 
-.mainButton {
-  background: var(--primary-color);
+.mainButton,
+a.mainButton {
+  overflow: hidden;
+  position: relative;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
   border: 1px solid var(--primary-color);
   padding: 8px 16px;
   border-radius: 10px;
 }
-.mainButton span {
-  color: var(--dark-color);
+.mainButton::before, .mainButton::after,
+a.mainButton::before,
+a.mainButton::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 10px;
+  height: 100%;
+  background-color: var(--primary-color);
+  opacity: 0.2;
+  transition: all linear 0.5s, width linear 0.5s 0.5s;
+}
+.mainButton::before,
+a.mainButton::before {
+  right: 0%;
+  border-radius: 0 10px 10px 0;
+}
+.mainButton::after,
+a.mainButton::after {
+  left: 0%;
+  border-radius: 10px 0 0 10px;
+}
+.mainButton:hover::before,
+a.mainButton:hover::before {
+  width: 50%;
+  transition: all linear 0.5s 0.5s, width linear 0.5s;
+  opacity: 1;
+}
+.mainButton:hover::after,
+a.mainButton:hover::after {
+  width: 50%;
+  transition: all linear 0.5s 0.5s, width linear 0.5s;
+  opacity: 1;
+}
+.mainButton span,
+a.mainButton span {
+  position: relative;
   font-size: 14px;
   font-weight: 600;
   transition-duration: 0.5s;
+  z-index: 3;
 }
-.mainButton span i {
+.mainButton span i,
+a.mainButton span i {
   margin-right: 5px;
   color: var(--dark-color);
+  color: var(--primary-color);
   transition-duration: 0.5s;
 }
-.mainButton:hover span {
+.mainButton:hover,
+a.mainButton:hover {
+  overflow: hidden;
+}
+.mainButton:hover span,
+a.mainButton:hover span {
   color: #000;
 }
-.mainButton:hover span i {
-  margin: 0px 5px 0px 5px;
+.mainButton:hover span i,
+a.mainButton:hover span i {
+  color: #000;
 }
 
 .title {
@@ -422,8 +473,8 @@ section {
   left: 50%;
   z-index: 2;
   transform: translate(-50%, 50%);
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   max-width: none;
   min-width: 30px;
   display: block;
@@ -2397,38 +2448,135 @@ footer .container .footer p .poptoon {
   right: initial;
   bottom: initial;
   left: 0;
-  z-index: 1000;
+  z-index: 10000;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
 }
-.popup[data-popup=list] .popup-element {
+.popup[data-popup=list] > .image {
   position: absolute;
   top: 0;
   right: initial;
   bottom: initial;
   left: 0;
   z-index: initial;
-  transform: translateX(-100%);
-  width: 550px;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+}
+.popup[data-popup=list] > .image .bucket {
+  position: absolute;
+  top: initial;
+  right: initial;
+  bottom: 0;
+  left: 0;
+  z-index: initial;
+  width: 250px;
+  transform: translateY(-200%) rotate(25deg);
+  transform-origin: bottom left;
+  transition: transform 2.5s;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  .popup[data-popup=list] > .image .bucket {
+    width: 180px;
+  }
+}
+.popup[data-popup=list] > .image .bucket {
+  /* 650 */
+}
+@media (min-width: 577px) and (max-width: 1300px) {
+  .popup[data-popup=list] > .image .bucket {
+    width: 250px;
+  }
+}
+.popup[data-popup=list] > .image .bucket.fall {
+  transform: translateY(0%) rotate(25deg);
+}
+.popup[data-popup=list] > .image .bucket.round {
+  transform: translateY(-110%) rotate(90deg);
+}
+.popup[data-popup=list] > .image .bucket > img {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+.popup[data-popup=list] > .image .bucket .pieces {
+  position: absolute;
+  top: 0;
+  right: initial;
+  bottom: initial;
+  left: 0;
+  z-index: initial;
+  width: 100%;
   height: 100%;
+  z-index: 3;
+}
+.popup[data-popup=list] > .image .piece {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+  position: absolute;
+  top: 40%;
+  right: initial;
+  bottom: initial;
+  left: initial;
+  z-index: initial;
+  cursor: grab;
+  touch-action: none;
+}
+.popup[data-popup=list] > .image .piece:active {
+  cursor: grabbing;
+}
+.popup[data-popup=list] > .image .piece .piece-of-popcorn {
+  width: 100%;
+}
+.popup[data-popup=list] > .image .piece > .movie {
+  position: absolute;
+  top: 50%;
+  right: initial;
+  bottom: initial;
+  left: 50%;
+  z-index: initial;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.popup[data-popup=list] .popup-element {
+  position: absolute;
+  top: initial;
+  right: initial;
+  bottom: 0;
+  left: 0;
+  z-index: initial;
+  transform: translateY(100%);
+  width: 100%;
+  height: 50%;
   padding: 50px 20px;
   background-color: rgba(255, 255, 255, 0.3);
   -webkit-backdrop-filter: blur(25px);
   backdrop-filter: blur(25px);
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
-  /* 350 */
 }
-@media (max-width: 1300px) {
-  .popup[data-popup=list] .popup-element {
-    width: 80%;
-    height: 100%;
-    max-width: 550px;
-  }
+.popup[data-popup=list] .popup-element > img {
+  position: absolute;
+  top: 0%;
+  right: initial;
+  bottom: initial;
+  left: 0;
+  z-index: initial;
+  transform: translateY(-100%);
 }
 .popup[data-popup=list] .popup-element.appear {
-  transform: translateX(0%);
+  transform: translateY(0%);
 }
 .popup[data-popup=list] .popup-element > i {
   position: absolute;
@@ -2448,9 +2596,16 @@ footer .container .footer p .poptoon {
   text-transform: capitalize;
 }
 .popup[data-popup=list] .popup-element .content {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+  flex-wrap: wrap;
+  row-gap: 15px;
   overflow-y: scroll;
   height: 98%;
-  padding-bottom: 20px;
+  padding: 20px;
   scrollbar-width: none;
 }
 .popup[data-popup=list] .popup-element .content > p {
@@ -2467,13 +2622,51 @@ footer .container .footer p .poptoon {
   border-radius: 10px;
 }
 .popup[data-popup=list] .popup-element .content .box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
-  margin-bottom: 10px;
+  margin: 10px;
   border-radius: 10px;
+  height: 250px;
   overflow: hidden;
+  width: calc(33.3333333333% - 30px);
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
+  opacity: 0;
+  transform: translateY(-15px);
+  transition-duration: 1s;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  .popup[data-popup=list] .popup-element .content .box {
+    width: 100%;
+  }
+}
+.popup[data-popup=list] .popup-element .content .box {
+  /* 1050 */
+}
+@media (min-width: 992px) and (max-width: 1300px) {
+  .popup[data-popup=list] .popup-element .content .box {
+    width: calc(50% - 30px);
+    min-height: 200px;
+  }
+}
+.popup[data-popup=list] .popup-element .content .box {
+  /* 1250 */
+}
+@media (min-width: 1181px) and (max-width: 1300px) {
+  .popup[data-popup=list] .popup-element .content .box {
+    min-height: initial;
+  }
+}
+.popup[data-popup=list] .popup-element .content .box.clicked {
+  background-color: var(--primary-color);
+}
+.popup[data-popup=list] .popup-element .content .box.appear {
+  transform: translateY(0px);
+  opacity: 1;
 }
 .popup[data-popup=list] .popup-element .content .box .image {
   max-width: 200px;
@@ -2556,10 +2749,15 @@ footer .container .footer p .poptoon {
   border-color: var(--primary-color);
   outline: none;
 }
+.popup[data-popup=sign] .popup-element form button {
+  color: var(--primary-color);
+}
 .popup[data-popup=sign] .popup-element .create-account p {
   font-size: 14px;
 }
-.popup[data-popup=sign] .popup-element .create-account p span {
+.popup[data-popup=sign] .popup-element .create-account p button.account {
+  background-color: transparent;
+  border: none;
   color: var(--primary-color);
   font-weight: 600;
   cursor: none;

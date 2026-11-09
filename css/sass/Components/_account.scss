@@ -22,7 +22,7 @@
         border-radius: 10px;
         transition-duration: .5s;
         opacity: 0;
-
+        
         &.appear {
             transform: translateY(0px);
             opacity: 1;
@@ -41,13 +41,18 @@
                     outline: none;
                 }
             }
+            button{
+                color: var(--primary-color);
+            }
         }
 
         .create-account {
             p {
                 font-size: 14px;
 
-                span {
+                button.account {
+                    background-color: transparent;
+                    border: none;
                     color: var(--primary-color);
                     font-weight: 600;
                     cursor: none;

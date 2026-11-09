@@ -421,9 +421,14 @@ function emptySearch() {
 // * Close Popup
 function closePopup(popupName, duration) {
     $(`.popup[data-popup='${popupName}'] .popup-element`).removeClass("appear");
+
+    $(".popup[data-popup='list'] >.image >img ").removeClass("round");
+
     setTimeout(function () {
         $(`.popup[data-popup='${popupName}']`).fadeOut(500);
         $(`.popup[data-popup='sign']`).removeClass("d-flex");
+        $(".popup[data-popup='list'] >.image >img ").removeClass("fall");
+        $(".popup[data-popup='list'] .popup-element .box").removeClass("appear");
     }, Number(duration));
 
     $(" .popup[data-popup='reviews'] > img").attr("src", "");
@@ -441,13 +446,15 @@ function removeToList(movieId, that) {
 
     if (indexOfMovie != -1) {
         listContainer.splice(indexOfMovie, 1);
+        $(that.closest(".box")).addClass("d-none");
+        $(`[data-popup='list'] .piece[data-id="${movieId}"]`).addClass("d-none");
         $(that.closest(".box"))?.empty();
     }
-
+    
     if (listContainer.length == 0) {
         $("[data-popup='list'] #EmptyList").removeClass("d-none");
     }
-
+    
     updateLocalStorage();
 }
 
@@ -478,24 +485,39 @@ function removedAlert() {
 }
 
 function showMyList() {
+    const content = $(".popup[data-popup='list'] .popup-element .content");
+    const piecesContainer = $(".popup[data-popup='list'] .pieces");
+
+    content.find(".box").remove();
+    piecesContainer.empty();
+
     if (listContainer.length >= 1) {
         $("[data-popup='list'] #EmptyList").addClass("d-none");
+    } else {
+        $("[data-popup='list'] #EmptyList").removeClass("d-none");
     }
 
     listContainer.forEach(function (movie) {
-        $(".popup[data-popup='list'] .popup-element .content").append(listCardComponent(movie));
-        updateLocalStorage();
-    })
+        content.append(listCardComponent(movie));
+        piecesContainer.append(popcornPiecesComponent(movie));
+    });
+
+    updateLocalStorage();
 }
+
 
 function listCardComponent(movie) {
     return `
-        <div class="box d-flex justify-content-center align-items-center">
+        <div class="box" data-id="${movie.id}">
             <div class="row w-100 flex-column flex-sm-row p-3">
+
                 <div class="image col-12 col-sm-3 rounded-2">
-                    <img src="https://image.tmdb.org/t/p/original${movie.images.posters[0].file_path}"
-                        class="w-100 rounded-2" alt="poster">
+                    <img
+                        src="https://image.tmdb.org/t/p/original${movie.images.posters[0].file_path}"
+                        class="w-100 rounded-2"
+                        alt="poster">
                 </div>
+
                 <div class="details col-12 col-sm-9">
                     <div class="text">
                         <h5>${movie.title}</h5>
@@ -503,20 +525,137 @@ function listCardComponent(movie) {
                     </div>
 
                     <div class="buttons">
-                        <a href="./pages/movie.html?id=${movie.id}" class="mb-2"><span>movie</span> <i
-                                class="fa-brands fa-empire fa-spin"></i></a>
+                        <a href="./pages/movie.html?id=${movie.id}" class="mb-2">
+                            <span>movie</span>
+                            <i class="fa-brands fa-empire fa-spin"></i>
+                        </a>
 
-                        <button class="remove mt-2" onclick="removeToList(${movie.id} , this)">
+                        <button class="remove mt-2"
+                            onclick="removeToList(${movie.id}, this)">
                             <span>
                                 <i class="fa-solid fa-trash"></i>
-                                Remove from  list
+                                Remove from list
                             </span>
                         </button>
                     </div>
                 </div>
+
             </div>
         </div>
-    `
+    `;
+}
+
+
+function popcornPiecesComponent(movie) {
+    const randomTop = Math.random() * 20;
+    const randomLeft = Math.random() * 55;
+
+    const randomRotate = Math.random() * 30 - 15;
+    const randomScale = 0.85 + Math.random() * 0.3;
+
+    return `
+        <div class="piece"
+            data-id="${movie.id}"
+            onclick="movieAlert(${movie.id})"
+
+            style="
+                top: ${randomTop}%;
+                left: ${randomLeft}%;
+                transform: rotate(${randomRotate}deg) scale(${randomScale});
+            ">
+
+            <img
+                src="./images/piece-of-popcorn.png"
+                class="piece-of-popcorn"
+                alt="popcorn">
+
+            <img
+                src="https://image.tmdb.org/t/p/original${movie.images.posters[0].file_path}"
+                class="movie"
+                alt="poster">
+
+        </div>
+    `;
+}
+
+
+function dropPieces() {
+    const image = document.querySelector(
+        ".popup[data-popup='list'] > .image"
+    );
+
+    const pieces = gsap.utils.toArray(".bucket .piece");
+    const imageRect = image.getBoundingClientRect();
+    const timeline = gsap.timeline({
+        onComplete: makePiecesDraggable
+    });
+    const rolls = [];
+
+    pieces.forEach((piece, index) => {
+        const rect = piece.getBoundingClientRect();
+        const startX = rect.left - imageRect.left;
+        const startY = rect.top - imageRect.top;
+        const baseRotation = Number(gsap.getProperty(piece, "rotation")) || 0;
+
+        image.appendChild(piece);
+
+        gsap.set(piece, {
+            position: "absolute",
+            left: startX,
+            top: startY,
+            x: 0,
+            y: 0,
+            rotation: baseRotation
+        });
+
+        const maxX = image.clientWidth - piece.offsetWidth;
+        const landingX = pieces.length === 1
+            ? maxX / 2
+            : maxX * index / (pieces.length - 1);
+        const landingY = image.clientHeight - piece.offsetHeight;
+        const rollDistance = landingX - startX;
+        const rollRotation = baseRotation + rollDistance / piece.offsetWidth * 360;
+
+        rolls.push({ piece, rollDistance, rollRotation });
+
+        timeline
+            .to(piece, {
+                y: landingY - startY,
+                rotation: baseRotation + (rollDistance < 0 ? -90 : 90),
+                duration: 0.55,
+                ease: "power2.in"
+            }, 0);
+    });
+
+    rolls.forEach(({ piece, rollDistance, rollRotation }) => {
+        timeline.to(piece, {
+            x: rollDistance,
+            rotation: rollRotation,
+            duration: Math.max(0.35, Math.abs(rollDistance) / 300),
+            ease: "power1.out"
+        }, 0.55);
+    });
+}
+
+function makePiecesDraggable() {
+    const pieces = document.querySelectorAll(
+        ".popup[data-popup='list'] .piece"
+    );
+
+    Draggable.create(pieces, {
+        type: "x,y",
+        bounds: ".popup[data-popup='list'] > .image",
+        inertia: true
+    });
+}
+
+function movieAlert(movieId) {
+    let clickedMovie = document.querySelector(`.popup[data-popup='list'] .popup-element .box[data-id="${movieId}"]`);
+    clickedMovie.classList.add("clicked");
+
+    setTimeout(() => {
+        clickedMovie.classList.remove("clicked");
+    }, 500);
 }
 
 function mouse() {
@@ -560,8 +699,6 @@ function mouse() {
             });
         });
 }
-
-
 
 // * Timeline
 let timeLine = document.querySelector(".timeline"),

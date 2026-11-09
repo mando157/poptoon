@@ -2,32 +2,117 @@
 
 .popup[data-popup="list"] {
     display: none;
-    @include position($p : fixed, $t : 0, $l : 0, $z : 1000);
+
+    @include position($p: fixed, $t: 0, $l: 0, $z: 10000);
     @include size(100%, 100%);
+
     background-color: rgba(0, 0, 0, .4);
+    backdrop-filter: blur(10px);
+
+    >.image {
+        @include position($t: 0, $l: 0);
+        @include size(100%, 50%);
+
+        overflow: hidden;
+
+        .bucket {
+            @include position($b: 0, $l: 0);
+
+            width: 250px;
+
+            transform: translateY(-200%) rotate(25deg);
+            transform-origin: bottom left;
+
+            transition: transform 2.5s;
+
+            @include responsive(350) {
+                width: 180px;
+            }
+
+            @include responsive(650) {
+                width: 250px;
+            }
+
+            &.fall {
+                transform: translateY(0%) rotate(25deg);
+            }
+
+            &.round {
+                transform: translateY(-110%) rotate(90deg);
+            }
+
+            >img {
+                width: 100%;
+                display: block;
+
+                position: relative;
+                z-index: 2;
+            }
+
+            .pieces {
+                @include position($t: 0, $l: 0);
+                @include size(100%, 100%);
+                z-index: 3;
+            }
+
+        }
+
+        .piece {
+            @include size(80px, 80px);
+            @include flex();
+            @include position($t: 40%);
+
+            cursor: grab;
+            touch-action: none;
+
+            &:active {
+                cursor: grabbing;
+            }
+
+            .piece-of-popcorn {
+                width: 100%;
+            }
+
+            >.movie {
+                @include position($t: 50%, $l: 50%);
+
+                transform: translate(-50%, -50%);
+
+                @include size(30px, 30px);
+
+                border-radius: 50%;
+            }
+        }
+    }
 
     .popup-element {
-        @include position($t : 0, $l : 0);
-        transform: translateX(-100%);
-        @include size(550px, 100%);
+        @include position($b: 0, $l: 0);
+        transform: translateY(100%);
+
+        @include size(100%, 50%);
+
         padding: 50px 20px;
+
         background-color: rgb(255, 255, 255, .3);
+
         -webkit-backdrop-filter: blur(25px);
         backdrop-filter: blur(25px);
+
         transition-duration: 1s;
         transition-timing-function: ease-in-out;
 
-        @include responsive(350) {
-            @include size(80%, 100%);
-            max-width: 550px;
+        >img {
+            @include position($t: 0%, $l: 0);
+            transform: translateY(-100%);
         }
 
+
         &.appear {
-            transform: translateX(0%);
+            transform: translateY(0%);
         }
 
         >i {
-            @include position($t : 20px, $r : 20px);
+            @include position($t: 20px, $r: 20px);
             cursor: none;
         }
 
@@ -35,44 +120,91 @@
             margin: auto;
             width: fit-content;
             margin-bottom: 20px;
+
             color: #fff;
             font-weight: 500;
             text-transform: capitalize;
         }
 
         .content {
+            @include flex($js: start);
+
+            flex-wrap: wrap;
+            row-gap: 15px;
+
             overflow-y: scroll;
             height: 98%;
-            padding-bottom: 20px;
 
+            padding: 20px;
             scrollbar-width: none;
 
             >p {
-                @include flex($g : 10px);
+                @include flex($g: 10px);
+
                 padding: 10px 20px;
+
                 background-color: teal;
                 color: #fff;
+
                 font-weight: 600;
                 font-size: clamp(10px, 6vw, 20px);
+
                 border-radius: 10px;
             }
 
             .box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 color: #fff;
-                margin-bottom: 10px;
+
+                margin: 10px;
                 border-radius: 10px;
+                height: 250px;
+
                 overflow: hidden;
 
+                width: calc((100% / 3) - 30px);
+
                 background-color: rgb(255, 255, 255, .3);
+
                 backdrop-filter: blur(25px);
                 -webkit-backdrop-filter: blur(25px);
+
+                opacity: 0;
+                transform: translateY(-15px);
+
+                transition-duration: 1s;
+
+                @include responsive(350) {
+                    width: 100%;
+                }
+
+                @include responsive(1050) {
+                    width: calc((100% / 2) - 30px);
+                    min-height: 200px;
+                }
+
+                @include responsive(1250) {
+                    min-height: initial;
+                }
+
+                &.clicked {
+                    background-color: var(--primary-color);
+                }
+
+                &.appear {
+                    transform: translateY(0px);
+                    opacity: 1;
+                }
 
                 .image {
                     max-width: 200px;
                 }
 
                 .details {
-                    @include flex($direction : column, $js : space-between);
+                    @include flex($direction: column,
+                        $js: space-between);
 
                     .text {
                         width: 100%;
@@ -92,21 +224,23 @@
                     .buttons {
                         a {
                             background-color: var(--primary-color);
+
                             padding: 5px 10px;
                             font-size: 18px;
                             margin-right: 10px;
+
                             border-radius: 5px;
                         }
 
                         button {
                             border-radius: 5px;
                             padding: 5px 10px;
+
                             border: none;
                             background-color: darkred;
                         }
                     }
                 }
-
             }
         }
     }

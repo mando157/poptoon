@@ -8,7 +8,7 @@ body {
     background: var(--surface);
 
     cursor: none;
-
+    
     ::selection {
         background-color: rgb(43, 181, 168, 0.8);
         backdrop-filter: blur(10px);
@@ -20,6 +20,9 @@ html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: var(--primary-color) var(--dark-color);
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 h1,
@@ -51,31 +54,80 @@ section {
 }
 
 
-.mainButton {
-    background: var(--primary-color);
+.mainButton,
+a.mainButton {
+    overflow: hidden;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--primary-color);
     padding: 8px 16px;
     border-radius: $border-r;
 
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 10px;
+        height: 100%;
+        background-color: var(--primary-color);
+        opacity: 0.2;
+        transition:
+            all linear 0.5s,
+            width linear 0.5s 0.5s;
+    }
+
+    &::before {
+        right: 0%;
+        border-radius: 0 $border-r $border-r 0;
+    }
+
+    &::after {
+        left: 0%;
+        border-radius: $border-r 0 0 $border-r;
+    }
+
+    &:hover::before {
+        width: 50%;
+        transition:
+            all linear 0.5s 0.5s,
+            width linear 0.5s;
+        opacity: 1;
+    }
+
+    &:hover::after {
+        width: 50%;
+        transition:
+            all linear 0.5s 0.5s,
+            width linear 0.5s;
+        opacity: 1;
+    }
+
     span {
-        color: var(--dark-color);
+        position: relative;
         font-size: 14px;
         font-weight: 600;
         transition-duration: .5s;
+        z-index: 3;
 
         i {
             margin-right: 5px;
             color: var(--dark-color);
+            color: var(--primary-color);
             transition-duration: .5s;
         }
     }
 
     &:hover {
+        overflow: hidden;
+
         span {
             color: #000;
 
             i {
-                margin: 0px 5px 0px 5px;
+                color: #000;
             }
         }
     }
@@ -376,8 +428,8 @@ section {
         >img {
             @include position($p : absolute, $b : 0px, $l : 50%, $z : 2);
             transform: translate(-50%, 50%);
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             max-width: none;
             min-width: 30px;
             display: block;

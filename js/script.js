@@ -81,8 +81,37 @@ $(".popup[data-popup='search'] .popup-element > p").click(function () {
 // * List Button
 
 $("#Nav .favorites , footer .favorites").click(function () {
-    $(`.popup[data-popup='list']`).fadeIn(500, function () {
+    const popup = $(".popup[data-popup='list']");
+    const droppedPieces = popup.children(".image").children(".piece").toArray();
+
+    droppedPieces.forEach((piece) => {
+        const draggable = Draggable.get(piece);
+        if (draggable) draggable.kill();
+        piece.remove();
+    });
+
+    showMyList();
+
+    const bucket = popup.find(".bucket");
+    bucket.removeClass("fall round");
+
+    popup.fadeIn(500, function () {
         $(".popup[data-popup='list'] .popup-element").addClass("appear");
+
+        bucket.addClass("fall");
+
+        setTimeout(() => {
+            bucket.addClass("round");
+
+            setTimeout(() => {
+                dropPieces();
+
+                $(".popup[data-popup='list'] .popup-element .box")
+                    .addClass("appear");
+
+            }, 2000);
+
+        }, 1300);
     });
 });
 
