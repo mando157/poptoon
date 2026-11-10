@@ -2,7 +2,7 @@
 
 .popup[data-popup='sign'] {
     display: none;
-    @include position($p : fixed, $t : 0, $l : 0, $z : 1100);
+    @include position($p : fixed, $t : 0, $l : 0, $z : 10000);
     @include size(100%, 100svh);
     background-color: var(--nav-back);
     -webkit-backdrop-filter: blur(25px);

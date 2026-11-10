@@ -721,6 +721,9 @@ a.mainButton:hover span i {
   animation: 1s 0.4s fullWidth infinite alternate;
 }
 
+#Home {
+  height: 100svh;
+}
 #Home .carousel .scroll-pages {
   position: absolute;
   top: initial;
@@ -2607,6 +2610,17 @@ footer .container .footer p .poptoon {
   height: 98%;
   padding: 20px;
   scrollbar-width: none;
+  /* 350 */
+}
+@media (max-width: 1300px) {
+  .popup[data-popup=list] .popup-element .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 0px;
+    row-gap: 15px;
+  }
 }
 .popup[data-popup=list] .popup-element .content > p {
   display: flex;
@@ -2628,7 +2642,7 @@ footer .container .footer p .poptoon {
   color: #fff;
   margin: 10px;
   border-radius: 10px;
-  height: 250px;
+  height: 200px;
   overflow: hidden;
   width: calc(33.3333333333% - 30px);
   background-color: rgba(255, 255, 255, 0.3);
@@ -2641,23 +2655,27 @@ footer .container .footer p .poptoon {
 }
 @media (max-width: 1300px) {
   .popup[data-popup=list] .popup-element .content .box {
-    width: 100%;
+    width: 280px;
+    margin: auto;
+    height: auto;
   }
 }
 .popup[data-popup=list] .popup-element .content .box {
-  /* 1050 */
+  /* 650 */
 }
-@media (min-width: 992px) and (max-width: 1300px) {
+@media (min-width: 577px) and (max-width: 1300px) {
   .popup[data-popup=list] .popup-element .content .box {
     width: calc(50% - 30px);
-    min-height: 200px;
+    margin: 0;
+    min-height: 470px;
   }
 }
 .popup[data-popup=list] .popup-element .content .box {
-  /* 1250 */
+  /* 850 */
 }
-@media (min-width: 1181px) and (max-width: 1300px) {
+@media (min-width: 769px) and (max-width: 1300px) {
   .popup[data-popup=list] .popup-element .content .box {
+    width: calc(50% - 30px);
     min-height: initial;
   }
 }
@@ -2670,6 +2688,7 @@ footer .container .footer p .poptoon {
 }
 .popup[data-popup=list] .popup-element .content .box .image {
   max-width: 200px;
+  margin: auto;
 }
 .popup[data-popup=list] .popup-element .content .box .details {
   display: flex;
@@ -2684,6 +2703,9 @@ footer .container .footer p .poptoon {
 .popup[data-popup=list] .popup-element .content .box .details .text h5 {
   margin: 0;
   font-size: 26px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .popup[data-popup=list] .popup-element .content .box .details .text .tagline {
   display: block;
@@ -2711,7 +2733,7 @@ footer .container .footer p .poptoon {
   right: initial;
   bottom: initial;
   left: 0;
-  z-index: 1100;
+  z-index: 10000;
   width: 100%;
   height: 100svh;
   background-color: var(--nav-back);

@@ -148,7 +148,6 @@ function carousalItemButtonComponent(movie, index) {
 }
 
 // * Top Rated Section
-
 function swiperSlideComponent(movie) {
     return `
         <div class="swiper-slide">
@@ -450,11 +449,11 @@ function removeToList(movieId, that) {
         $(`[data-popup='list'] .piece[data-id="${movieId}"]`).addClass("d-none");
         $(that.closest(".box"))?.empty();
     }
-    
+
     if (listContainer.length == 0) {
         $("[data-popup='list'] #EmptyList").removeClass("d-none");
     }
-    
+
     updateLocalStorage();
 }
 
@@ -484,6 +483,7 @@ function removedAlert() {
     });
 }
 
+// * My List Popup
 function showMyList() {
     const content = $(".popup[data-popup='list'] .popup-element .content");
     const piecesContainer = $(".popup[data-popup='list'] .pieces");
@@ -505,20 +505,19 @@ function showMyList() {
     updateLocalStorage();
 }
 
-
 function listCardComponent(movie) {
     return `
         <div class="box" data-id="${movie.id}">
-            <div class="row w-100 flex-column flex-sm-row p-3">
+            <div class="row w-100 flex-column flex-md-row p-3">
 
-                <div class="image col-12 col-sm-3 rounded-2">
+                <div class="image col-12 col-md-3 rounded-2">
                     <img
                         src="https://image.tmdb.org/t/p/original${movie.images.posters[0].file_path}"
                         class="w-100 rounded-2"
                         alt="poster">
                 </div>
 
-                <div class="details col-12 col-sm-9">
+                <div class="details col-12 col-md-9">
                     <div class="text">
                         <h5>${movie.title}</h5>
                         <span class="tagline">${movie.tagline}</span>
@@ -544,7 +543,6 @@ function listCardComponent(movie) {
         </div>
     `;
 }
-
 
 function popcornPiecesComponent(movie) {
     const randomTop = Math.random() * 20;
@@ -577,7 +575,6 @@ function popcornPiecesComponent(movie) {
         </div>
     `;
 }
-
 
 function dropPieces() {
     const image = document.querySelector(
@@ -650,7 +647,15 @@ function makePiecesDraggable() {
 }
 
 function movieAlert(movieId) {
-    let clickedMovie = document.querySelector(`.popup[data-popup='list'] .popup-element .box[data-id="${movieId}"]`);
+    let clickedMovie = document.querySelector(`.popup[data-popup='list'] .popup-element .box[data-id="${movieId}"]`),
+        topOfMovieBox = clickedMovie.offsetTop,
+        content = document.querySelector(".popup[data-popup='list'] .popup-element .content");
+
+    content.scrollTo({
+        top : topOfMovieBox - 110,
+        behavior : "smooth",
+    });
+
     clickedMovie.classList.add("clicked");
 
     setTimeout(() => {

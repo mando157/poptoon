@@ -1,6 +1,7 @@
 @use "../abstracts/" as *;
 
 #Home {
+    height: 100svh;
     .carousel {
         .scroll-pages {
             @include position($b: 5%, $r: 0%, $z: 10);
