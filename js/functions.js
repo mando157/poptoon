@@ -493,8 +493,10 @@ function showMyList() {
 
     if (listContainer.length >= 1) {
         $("[data-popup='list'] #EmptyList").addClass("d-none");
+        $("[data-popup='list'] >.image").removeClass("d-none");
     } else {
         $("[data-popup='list'] #EmptyList").removeClass("d-none");
+        $("[data-popup='list'] >.image").addClass("d-none");
     }
 
     listContainer.forEach(function (movie) {
@@ -577,6 +579,10 @@ function popcornPiecesComponent(movie) {
 }
 
 function dropPieces() {
+    if(listContainer == 0){
+        return;
+    }
+    
     const image = document.querySelector(
         ".popup[data-popup='list'] > .image"
     );
@@ -652,8 +658,8 @@ function movieAlert(movieId) {
         content = document.querySelector(".popup[data-popup='list'] .popup-element .content");
 
     content.scrollTo({
-        top : topOfMovieBox - 110,
-        behavior : "smooth",
+        top: topOfMovieBox - 110,
+        behavior: "smooth",
     });
 
     clickedMovie.classList.add("clicked");
@@ -663,6 +669,101 @@ function movieAlert(movieId) {
     }, 500);
 }
 
+function removeAll() {
+    const popup = document.querySelector(".popup[data-popup='list']");
+    const image = popup.querySelector(":scope > .image");
+    const bucket = popup.querySelector(".bucket");
+    const pieces = gsap.utils.toArray(".popup[data-popup='list'] .piece");
+
+    let vacuumCleaner = document.querySelector(".popup[data-popup='list'] .image >img");
+
+    setTimeout(() => {
+        resetListAnimation(vacuumCleaner);
+        closePopup('list' , '500');
+    }, 6500);
+
+    if (listContainer.length == 0) {
+        bucket.classList.add("lift");
+        finishRemoveAll();
+        return;
+    }else if (listContainer.length >= 1) {
+        resetListAnimation(vacuumCleaner);
+    }
+
+    const imageRect = image.getBoundingClientRect();
+    const timeline = gsap.timeline({
+        onComplete: finishRemoveAll
+    });
+
+    pieces.forEach(function (piece, index) {
+        const draggable = Draggable.get(piece);
+        if (draggable) draggable.kill();
+
+        const rect = piece.getBoundingClientRect();
+        const startX = rect.left - imageRect.left;
+        const startY = rect.top - imageRect.top;
+        const pieceWidth = piece.offsetWidth;
+        const pieceHeight = piece.offsetHeight;
+        const slotWidth = pieceWidth + 4;
+        const columns = Math.max(1, Math.floor((image.clientWidth - 16) / slotWidth));
+        const orderIndex = pieces.length - 1 - index;
+        const row = Math.floor(orderIndex / columns);
+        const column = orderIndex % columns;
+        const targetX = image.clientWidth - 8 - pieceWidth - column * slotWidth;
+        const targetY = image.clientHeight - pieceHeight - row * (pieceHeight * 0.55);
+        const baseRotation = Number(gsap.getProperty(piece, "rotation")) || 0;
+
+        gsap.killTweensOf(piece);
+        image.appendChild(piece);
+        gsap.set(piece, {
+            position: "absolute",
+            left: startX,
+            top: startY,
+            x: 0,
+            y: 0,
+            rotation: baseRotation
+        });
+        piece.removeAttribute("onclick");
+
+        timeline.to(piece, {
+            left: targetX,
+            top: targetY,
+            rotation: baseRotation + (index % 2 === 0 ? 180 : -180),
+            duration: 0.55,
+            ease: "power2.in"
+        }, index * 0.18);
+
+        setTimeout(() => {
+            vacuumCleaner.setAttribute("src", "./images/vacuum-cleaner.svg");
+            vacuumCleaner.classList.remove("d-none");
+            vacuumCleaner.classList.add("d-block");
+
+            setTimeout(() => {
+                $(piece).fadeOut(500);
+                $(piece).addClass("shrink");
+            }, 100);
+        }, 500);
+    });
+
+    bucket.classList.add("lift");
+}
+
+function finishRemoveAll() {
+    $(".popup[data-popup='list'] .popup-element .content .box").remove();
+    $("[data-popup='list'] #EmptyList").removeClass("d-none");
+    listContainer = [];
+    updateLocalStorage();
+}
+
+function resetListAnimation(vacuumCleaner, piece = null) {
+    $(piece).removeClass("shrink");
+
+    vacuumCleaner.setAttribute("src", "");
+    vacuumCleaner.classList.remove("d-block");
+    vacuumCleaner.classList.add("d-none");
+}
+
+// * Mouse
 function mouse() {
     const cursor = document.querySelector(".mouse");
     const follower = document.querySelector(".mouse-follower");

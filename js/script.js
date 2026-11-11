@@ -83,6 +83,7 @@ $(".popup[data-popup='search'] .popup-element > p").click(function () {
 $("#Nav .favorites , footer .favorites").click(function () {
     const popup = $(".popup[data-popup='list']");
     const droppedPieces = popup.children(".image").children(".piece").toArray();
+    const removeAllButton = document.querySelector(".popup[data-popup='list'] .remove-all");
 
     droppedPieces.forEach((piece) => {
         const draggable = Draggable.get(piece);
@@ -93,12 +94,13 @@ $("#Nav .favorites , footer .favorites").click(function () {
     showMyList();
 
     const bucket = popup.find(".bucket");
-    bucket.removeClass("fall round");
+    bucket.removeClass("fall round lift");
 
     popup.fadeIn(500, function () {
         $(".popup[data-popup='list'] .popup-element").addClass("appear");
 
         bucket.addClass("fall");
+        removeAllButton.classList.remove('d-none');
 
         setTimeout(() => {
             bucket.addClass("round");
@@ -112,6 +114,10 @@ $("#Nav .favorites , footer .favorites").click(function () {
             }, 2000);
 
         }, 1300);
+
+        if (listContainer == 0) {
+            removeAllButton.classList.add('d-none');
+        }
     });
 });
 

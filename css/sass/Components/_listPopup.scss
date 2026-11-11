@@ -15,6 +15,23 @@
 
         overflow: hidden;
 
+        >img {
+            @include position($b : 0, $r : 0, $z : 2);
+            width: 100%;
+
+            @include responsive(350) {
+                width: 300%;
+            }
+
+            @include responsive(650) {
+                width: 200%;
+            }
+
+            @include responsive(850) {
+                width: 100%;
+            }
+        }
+
         .bucket {
             @include position($b: 0, $l: 0);
 
@@ -41,6 +58,10 @@
                 transform: translateY(-110%) rotate(90deg);
             }
 
+            &.lift {
+                transform: translateY(-200%) rotate(25deg);
+            }
+
             >img {
                 width: 100%;
                 display: block;
@@ -53,6 +74,11 @@
                 @include position($t: 0, $l: 0);
                 @include size(100%, 100%);
                 z-index: 3;
+                transition-duration: .5s;
+
+                &.shrink {
+                    transform: scale(0.2);
+                }
             }
 
         }
@@ -114,14 +140,43 @@
         >i {
             @include position($t: 20px, $r: 20px);
             cursor: none;
+            background-color: var(--primary-color);
+            @include size(40px, 30px);
+            @include flex();
+            border-radius: 5px;
+            transition-duration: .3s;
+
+            &:hover {
+                transform: scale(1.03);
+                box-shadow: 0px 0px 12px 5px var(--primary-color);
+            }
+        }
+
+        >button {
+            @include position($t: 20px, $r: 80px);
+            background-color: var(--primary-color);
+            cursor: none;
+            border-radius: 5px;
+            transition-duration: .3s;
+            color: #000;
+            border: none;
+            @include size(auto, 30px);
+            padding: 0px 15px;
+            font-weight: 500;
+
+            &:hover {
+                transform: scale(1.03);
+                box-shadow: 0px 0px 12px 5px var(--primary-color);
+            }
         }
 
         h3 {
             margin: auto;
             width: fit-content;
             margin-bottom: 20px;
-
+            font-size: 30px;
             color: #fff;
+            text-shadow: 0px 0px 25px var(--primary-color);
             font-weight: 500;
             text-transform: capitalize;
         }
