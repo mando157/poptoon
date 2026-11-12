@@ -66,6 +66,18 @@ $(".mood").on("click", function () {
     updateLocalStorage();
 });
 
+if (localStorage.getItem('isDark') == 'true') {
+    $(".mood i").addClass("fa-sun").removeClass("fa-moon");
+    $(".logo img").attr("src", "./images/dark_logo.png");
+    $(".logo img.movie-logo").attr("src", "../images/dark_logo.png");
+    $("#Categories .title .search").attr("src", "./images/dark_search.gif");
+} else {
+    $(".mood i").addClass("fa-moon").removeClass("fa-sun");
+    $(".logo img").attr("src", "./images/light_logo.png");
+    $(".logo img.movie-logo").attr("src", "../images/light_logo.png");
+    $("#Categories .title .search").attr("src", "./images/light_search.gif");
+}
+
 
 // * Get Movies
 async function getMovies() {
@@ -345,8 +357,6 @@ function toNextPage() {
     let currentPaginate = document.querySelector(".page-item.active"),
         nextPaginate = currentPaginate.nextElementSibling ?? currentPaginate.parentElement.querySelector(":first-child");
 
-    console.log(currentPaginate.parentElement.querySelector(":first-child"));
-
     currentPaginate.classList.remove("active");
     nextPaginate.classList.add("active");
 
@@ -579,10 +589,10 @@ function popcornPiecesComponent(movie) {
 }
 
 function dropPieces() {
-    if(listContainer == 0){
+    if (listContainer == 0) {
         return;
     }
-    
+
     const image = document.querySelector(
         ".popup[data-popup='list'] > .image"
     );
@@ -669,7 +679,7 @@ function movieAlert(movieId) {
     }, 500);
 }
 
-function removeAll() {
+function removeAll(that) {
     const popup = document.querySelector(".popup[data-popup='list']");
     const image = popup.querySelector(":scope > .image");
     const bucket = popup.querySelector(".bucket");
@@ -677,16 +687,18 @@ function removeAll() {
 
     let vacuumCleaner = document.querySelector(".popup[data-popup='list'] .image >img");
 
+    that.classList.add('d-none');
+
     setTimeout(() => {
         resetListAnimation(vacuumCleaner);
-        closePopup('list' , '500');
+        closePopup('list', '500');
     }, 6500);
 
     if (listContainer.length == 0) {
         bucket.classList.add("lift");
         finishRemoveAll();
         return;
-    }else if (listContainer.length >= 1) {
+    } else if (listContainer.length >= 1) {
         resetListAnimation(vacuumCleaner);
     }
 
